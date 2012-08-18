@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/widget32"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical">
+	<TextView android:id="@+id/word" android:layout_width="fill_parent"
+		android:layout_height="60px" android:text="@string/hello"
+		android:textSize="40px" android:gravity="center_horizontal">
+	</TextView>
+	<ListView
+            android:id="@+id/list"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:focusable="true"/>	
+	<TextView android:id="@+id/output" android:layout_width="fill_parent"
+		android:layout_height="25px" android:text="@string/hello"
+		android:textSize="15px" android:textStyle="bold" android:textColor="#cc0000"
+		android:gravity="center_horizontal">
+	</TextView>
+	<TextView android:id="@+id/totalResult" android:layout_width="fill_parent"
+		android:layout_height="25px" android:text="@string/hello"
+		android:textSize="15px" android:textStyle="bold" android:gravity="center_horizontal">
+	</TextView>
+	<TextView android:id="@+id/consecutiveResult"
+		android:layout_width="fill_parent" android:layout_height="25px"
+		android:text="@string/hello" android:textSize="15px"
+		android:textStyle="bold" android:gravity="center_horizontal">
+	</TextView>
+	<TextView android:id="@+id/record" android:layout_width="fill_parent"
+		android:layout_height="25px" android:text="@string/hello"
+		android:textSize="15px" android:textStyle="bold" android:gravity="center_horizontal">
+	</TextView>
+</LinearLayout>
