@@ -50,13 +50,15 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int actionbar_compat_item_focused=0x7f020001;
         public static final int actionbar_compat_item_pressed=0x7f020002;
         public static final int actionbar_shadow=0x7f020003;
-        public static final int ic_action_refresh=0x7f020004;
-        public static final int ic_action_search=0x7f020005;
-        public static final int ic_action_share=0x7f020006;
-        public static final int ic_home=0x7f020007;
-        public static final int ic_launcher=0x7f020008;
-        public static final int ic_menu_menu=0x7f020009;
-        public static final int ic_menu_share=0x7f02000a;
+        public static final int ic_action_menu=0x7f020004;
+        public static final int ic_action_refresh=0x7f020005;
+        public static final int ic_action_search=0x7f020006;
+        public static final int ic_action_share=0x7f020007;
+        public static final int ic_home=0x7f020008;
+        public static final int ic_launcher=0x7f020009;
+        public static final int ic_menu_menu=0x7f02000a;
+        public static final int ic_menu_reset=0x7f02000b;
+        public static final int ic_menu_share=0x7f02000c;
     }
     public static final class id {
         public static final int actionbar_compat=0x7f060000;
@@ -71,10 +73,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int fragment_container=0x7f060007;
         public static final int headlines_fragment=0x7f060008;
         public static final int list=0x7f06000c;
-        public static final int menu_menu=0x7f060015;
+        public static final int menu_menu=0x7f060016;
         public static final int menu_refresh=0x7f060004;
+        public static final int menu_reset=0x7f060014;
         public static final int menu_search=0x7f060013;
-        public static final int menu_share=0x7f060014;
+        public static final int menu_share=0x7f060015;
         public static final int question=0x7f06000b;
         public static final int quiz_feedback_layout=0x7f06000d;
         public static final int quiz_layout=0x7f06000a;
@@ -101,6 +104,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int hello=0x7f070004;
         public static final int menu_menu=0x7f070008;
         public static final int menu_refresh=0x7f070005;
+        public static final int menu_reset=0x7f070009;
         public static final int menu_search=0x7f070006;
         public static final int menu_share=0x7f070007;
         public static final int toggle_title=0x7f070002;

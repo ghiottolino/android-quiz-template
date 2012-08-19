@@ -24,5 +24,6 @@
     <string name="menu_search">Search</string>
     <string name="menu_share">Share</string>
     <string name="menu_menu">Menu</string>
+    <string name="menu_reset">Reset</string>
     
 </resources>

@@ -12,32 +12,48 @@
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
   limitations under the License.
-  -->
+-->
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/menu_refresh"
-        android:title="@string/menu_refresh"
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+      <!-- action bar menu android:showAsAction="always"-->
+    <item
+        android:id="@+id/menu_refresh"
         android:icon="@drawable/ic_action_refresh"
         android:orderInCategory="1"
-        android:showAsAction="always" />
-    <item android:id="@+id/menu_search"
-        android:title="@string/menu_search"
+        android:showAsAction="never"
+        android:title="@string/menu_refresh"
+        android:visible="false"/>
+    <item
+        android:id="@+id/menu_search"
         android:icon="@drawable/ic_action_search"
         android:orderInCategory="0"
-        android:showAsAction="always" />
-
-    <item android:id="@+id/menu_share"
-        android:title="@string/menu_share"
-        android:icon="@drawable/ic_menu_share"
-        android:orderInCategory="1"
-        android:showAsAction="never" />
+        android:showAsAction="never"
+        android:title="@string/menu_search"
+        android:visible="false"/>
     
-    <!-- this menu is always invisible and just needed by Version < HoneyComb to show the menu as in >= HoneyComb -->
-    <item android:id="@+id/menu_menu"
-        android:title="@string/menu_menu"
-        android:icon="@drawable/ic_menu_menu"
+    <!-- pop up menu -->
+    <item
+        android:id="@+id/menu_reset"
+        android:icon="@drawable/ic_menu_reset"
         android:orderInCategory="1"
         android:showAsAction="never"
-        android:visible="false" />
-    
+        android:title="@string/menu_reset"/>
+    <item
+        android:id="@+id/menu_share"
+        android:icon="@drawable/ic_menu_share"
+        android:orderInCategory="1"
+        android:showAsAction="never"
+        android:title="@string/menu_share"
+        android:visible="false"/>
+
+    <!-- this menu is always invisible and just needed by Version < HoneyComb to show the menu as in >= HoneyComb -->
+    <item
+        android:id="@+id/menu_menu"
+        android:icon="@drawable/ic_action_menu"
+        android:orderInCategory="1"
+        android:showAsAction="never"
+        android:title="@string/menu_menu"
+        android:visible="false"/>
+
 </menu>

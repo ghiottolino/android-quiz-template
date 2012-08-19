@@ -152,6 +152,11 @@ public class Game {
 		return this.record;
 	}
 
+
+	public void setRecord(int record) {
+		this.record = record;
+	}
+
 	
 
 	

@@ -76,7 +76,7 @@ public class QuizActivity extends ActionBarActivity {
 		initGame();
 		this.question = this.game.getQuestion();
 		displayQuestion(question);
-
+		showFeedback(game.getSession());
 	}
 
 	public void displayQuestion(final Question question) {
@@ -126,7 +126,17 @@ public class QuizActivity extends ActionBarActivity {
 				+ session.getConsecutiveAttempts().toString());
 		recordTextView.setText("record: " + this.game.getRecord());
 	}
-
+	
+	public void reset() {
+		saveFieldInPreferences(RECORD_PREF_KEY, 0);
+		Session newSession = new Session();
+		game.setRecord(0);
+		game.setSession(newSession);
+		this.question = this.game.getQuestion();
+		displayQuestion(question);
+		showFeedback(game.getSession());	
+	}
+		
 	public void initGame() {
 		List<Question> questions = new Vector<Question>();
 		List<Answer> answers1 = new Vector<Answer>();
@@ -244,7 +254,12 @@ public class QuizActivity extends ActionBarActivity {
 			this.openOptionsMenu();
 			Toast.makeText(this, "Tapped menu", Toast.LENGTH_SHORT).show();
 			break;
+
+		case R.id.menu_reset:
+			reset();
+			break;
 		}
+
 		return super.onOptionsItemSelected(item);
 	}
 
