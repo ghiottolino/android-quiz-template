@@ -55,7 +55,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int ic_action_share=0x7f020006;
         public static final int ic_home=0x7f020007;
         public static final int ic_launcher=0x7f020008;
-        public static final int ic_menu_share=0x7f020009;
+        public static final int ic_menu_menu=0x7f020009;
+        public static final int ic_menu_share=0x7f02000a;
     }
     public static final class id {
         public static final int actionbar_compat=0x7f060000;
@@ -70,6 +71,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int fragment_container=0x7f060007;
         public static final int headlines_fragment=0x7f060008;
         public static final int list=0x7f06000c;
+        public static final int menu_menu=0x7f060015;
         public static final int menu_refresh=0x7f060004;
         public static final int menu_search=0x7f060013;
         public static final int menu_share=0x7f060014;
@@ -97,6 +99,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int app_name=0x7f070000;
         public static final int error_message=0x7f070003;
         public static final int hello=0x7f070004;
+        public static final int menu_menu=0x7f070008;
         public static final int menu_refresh=0x7f070005;
         public static final int menu_search=0x7f070006;
         public static final int menu_share=0x7f070007;

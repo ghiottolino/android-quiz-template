@@ -44,11 +44,11 @@ import android.widget.Toast;
 import android.widget.Button;
 
 public class QuizActivity extends ActionBarActivity {
-	
+
 	public static final String RECORD_PREF_KEY = "RECORD";
-	
+
 	public static final String PREFS_NAME = "ANDROID_QUIZ_TEMPLATE";
-	
+
 	private TextView questionTextView;
 	private TextView errorTextView;
 	private TextView totalResultTextView;
@@ -87,9 +87,8 @@ public class QuizActivity extends ActionBarActivity {
 				Button button = (Button) v;
 				Answer answer = new Answer(button.getText().toString(), true);
 				boolean checkAnswer = checkAnswer(answer);
-				if (!checkAnswer)
-				{
-					button.setEnabled(false);					
+				if (!checkAnswer) {
+					button.setEnabled(false);
 				}
 
 			}
@@ -102,17 +101,16 @@ public class QuizActivity extends ActionBarActivity {
 	public boolean checkAnswer(Answer answer) {
 		boolean checkAnswer = game.checkAnswer(question, answer);
 		if (checkAnswer) {
-			if (game.isNewRecord()){
+			if (game.isNewRecord()) {
 				int currentRecord = game.getSession().getConsecutiveAttempts();
 				saveFieldInPreferences(RECORD_PREF_KEY, currentRecord);
-				showTextToClipboardNotification("Congratulations, you set a new record: "+currentRecord);
+				showTextToClipboardNotification("Congratulations, you set a new record: "
+						+ currentRecord);
 			}
 			question = game.getQuestion();
 			displayQuestion(question);
 			errorTextView.setVisibility(View.GONE);
-		}
-		else
-		{
+		} else {
 			errorTextView.setVisibility(View.VISIBLE);
 		}
 		showFeedback(this.game.getSession());
@@ -121,11 +119,12 @@ public class QuizActivity extends ActionBarActivity {
 
 	public void showFeedback(Session session) {
 
-		totalResultTextView.setText("total: " + session.getCorrectAttempts().toString()
-				+ "/" + session.getTotalAttempts().toString());
+		totalResultTextView.setText("total: "
+				+ session.getCorrectAttempts().toString() + "/"
+				+ session.getTotalAttempts().toString());
 		consecutiveResultTextView.setText("consecutive: "
 				+ session.getConsecutiveAttempts().toString());
-		recordTextView.setText("record: "+this.game.getRecord());
+		recordTextView.setText("record: " + this.game.getRecord());
 	}
 
 	public void initGame() {
@@ -173,27 +172,26 @@ public class QuizActivity extends ActionBarActivity {
 		questions.add(question4);
 
 		Integer record = getFieldInPreferences(RECORD_PREF_KEY);
-		this.game = new Game(questions,record);
+		this.game = new Game(questions, record);
 	}
 
 	protected Integer getFieldInPreferences(String fieldName) {
 
-    	SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-    	int record = settings.getInt(fieldName, 0);
-    	return record;
+		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+		int record = settings.getInt(fieldName, 0);
+		return record;
 	}
-	
+
 	protected void saveFieldInPreferences(String fieldName, Integer n) {
 
-    	SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 		SharedPreferences.Editor editor = settings.edit();
 		editor.putInt(fieldName, n);
 
 		// Commit the edits!
 		boolean commit = editor.commit();
 	}
-	
-	
+
 	protected void showTextToClipboardNotification(String text) {
 		Context context = getApplicationContext();
 		int duration = Toast.LENGTH_SHORT;
@@ -240,6 +238,11 @@ public class QuizActivity extends ActionBarActivity {
 
 		case R.id.menu_share:
 			Toast.makeText(this, "Tapped share", Toast.LENGTH_SHORT).show();
+			break;
+
+		case R.id.menu_menu:
+			this.openOptionsMenu();
+			Toast.makeText(this, "Tapped menu", Toast.LENGTH_SHORT).show();
 			break;
 		}
 		return super.onOptionsItemSelected(item);

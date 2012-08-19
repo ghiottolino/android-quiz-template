@@ -31,4 +31,13 @@
         android:icon="@drawable/ic_menu_share"
         android:orderInCategory="1"
         android:showAsAction="never" />
+    
+    <!-- this menu is always invisible and just needed by Version < HoneyComb to show the menu as in >= HoneyComb -->
+    <item android:id="@+id/menu_menu"
+        android:title="@string/menu_menu"
+        android:icon="@drawable/ic_menu_menu"
+        android:orderInCategory="1"
+        android:showAsAction="never"
+        android:visible="false" />
+    
 </menu>

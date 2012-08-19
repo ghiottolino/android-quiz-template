@@ -76,6 +76,11 @@ public class ActionBarHelperBase extends ActionBarHelper {
                 addActionItemCompatFromMenuItem(item);
             }
         }
+        
+        // display an icon on Android < Honey Comb for diplay a button in the action bar for opening the non action menu
+        MenuItem item = new SimpleMenuItem(menu, R.id.menu_menu, 4, "Menu");
+        item.setIcon(R.drawable.ic_menu_menu);
+        addActionItemCompatFromMenuItem(item);
     }
 
     /**
