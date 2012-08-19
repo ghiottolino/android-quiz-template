@@ -12,7 +12,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="2"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:text="@string/hello"
         android:textSize="@dimen/question_size" >
     </TextView>
@@ -31,7 +31,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="1.8"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:orientation="vertical" >
 
         <TextView
