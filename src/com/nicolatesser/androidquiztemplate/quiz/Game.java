@@ -1,6 +1,7 @@
 package com.nicolatesser.androidquiztemplate.quiz;
 
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
@@ -21,6 +22,7 @@ public class Game {
 	{
 		// TODO: load question, etc...
 		this.questions=questions;
+		this.recentlyWronglyAnsweredQuestions = new LinkedList<Question>();
 		this.session=new Session();
 	}
 	
@@ -42,6 +44,7 @@ public class Game {
 		// then retrieves one of that question
 		if (shouldChooseFromWrongAnsweredQuestions()) {
 			question = getRandomQuestionFromQuestionList(this.recentlyWronglyAnsweredQuestions);
+			recentlyWronglyAnsweredQuestions.remove(question);
 		} else {
 			question = getRandomQuestionFromQuestionList(this.questions);
 		}
@@ -56,7 +59,6 @@ public class Game {
 		Collections.shuffle(questions);
 		// TODO : make more robust, check for null....
 		Question question = questions.get(0);
-		questions.remove(question);
 		return question;
 	}
 

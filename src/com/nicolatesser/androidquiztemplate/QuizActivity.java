@@ -19,26 +19,28 @@ import java.util.List;
 import java.util.Vector;
 
 import com.nicolatesser.androidquiztemplate.actionbarcompat.ActionBarActivity;
-import com.nicolatesser.androidquiztemplate.fragments.ArticleFragment;
-import com.nicolatesser.androidquiztemplate.fragments.HeadlinesFragment;
+
 import com.nicolatesser.androidquiztemplate.quiz.Answer;
 import com.nicolatesser.androidquiztemplate.quiz.Game;
 import com.nicolatesser.androidquiztemplate.quiz.Question;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
+
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
+import android.view.View;
+import android.view.View.OnClickListener;
+
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Button;
 
-public class QuizActivity extends ActionBarActivity {
+public class QuizActivity extends ActionBarActivity{
 	
 	
 	private TextView questionTextView;
@@ -48,7 +50,9 @@ public class QuizActivity extends ActionBarActivity {
 	private TextView recordTextView;
 	private ListView mListView;
 	private ListAdapter adapter;
+	
 	private Game game;
+	private Question question;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -67,17 +71,37 @@ public class QuizActivity extends ActionBarActivity {
 		
 		
 		initGame();
-		Question question = this.game.getQuestion();
+		this.question = this.game.getQuestion();
 		displayQuestion(question);
 		
 
 	}
 	
-	public void displayQuestion(Question question)
+	public void displayQuestion(final Question question)
 	{
 		questionTextView.setText(question.getQuestionText());
-		adapter = new AnswerAdapter(this, R.id.answer, question.getAnswers());
+		OnClickListener listener= new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Button button = (Button) v;
+				Answer answer = new Answer(button.getText().toString(), true);
+				checkAnswer(answer);
+
+			}
+		};
+		adapter = new AnswerAdapter(this, R.id.answer, question.getAnswers(),listener);
 		mListView.setAdapter(adapter);
+	}
+	
+	public void checkAnswer(Answer answer)
+	{
+		boolean checkAnswer = game.checkAnswer(question,answer);
+		showTextToClipboardNotification("correctness: "+checkAnswer);
+		if (checkAnswer)
+		{
+			question = game.getQuestion();
+			displayQuestion(question);		
+		}
 	}
 
 	public void initGame() {
@@ -101,6 +125,23 @@ public class QuizActivity extends ActionBarActivity {
 
 		this.game = new Game(questions);
 	}
+
+	
+	
+	
+	
+	
+	
+	
+	protected void showTextToClipboardNotification(String text) {
+		Context context = getApplicationContext();
+		int duration = Toast.LENGTH_SHORT;
+		Toast toast = Toast.makeText(context, text, duration);
+		toast.show();
+
+	}
+	
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -144,5 +185,7 @@ public class QuizActivity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
+
 
 }

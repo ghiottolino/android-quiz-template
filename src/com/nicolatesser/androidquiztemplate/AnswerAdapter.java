@@ -4,11 +4,12 @@ package com.nicolatesser.androidquiztemplate;
 import java.util.List;
 
 import com.nicolatesser.androidquiztemplate.quiz.Answer;
-import com.nicolatesser.androidquiztemplate.quiz.Question;
+
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -18,12 +19,14 @@ public class AnswerAdapter extends ArrayAdapter<Answer>{
     Context context;
     int layoutResourceId;   
     List<Answer> data = null;
+    OnClickListener listener = null;
    
-    public AnswerAdapter(Context context, int layoutResourceId, List<Answer> data) {
+    public AnswerAdapter(Context context, int layoutResourceId, List<Answer> data, OnClickListener listener) {
         super(context, layoutResourceId, data);
         this.layoutResourceId = layoutResourceId;
         this.context = context;
         this.data = data;
+        this.listener = listener;
     }
 
     @Override
@@ -40,7 +43,7 @@ public class AnswerAdapter extends ArrayAdapter<Answer>{
         int height = parent.getHeight();    
         int targetHeight = (int) Math.floor(height/(data.size()));
         button.setHeight(targetHeight);
-       
+        button.setOnClickListener(listener);
         return v;
     }
    

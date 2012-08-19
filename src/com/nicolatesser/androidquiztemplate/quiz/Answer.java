@@ -51,8 +51,6 @@ public class Answer {
         this.answerCorrect = answerCorrect;
     }
 
-
-
     /**
      * @return the answerId
      */
@@ -73,4 +71,37 @@ public class Answer {
     public boolean isAnswerCorrect() {
         return this.answerCorrect;
     }
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (answerCorrect ? 1231 : 1237);
+		result = prime * result
+				+ ((answerText == null) ? 0 : answerText.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Answer other = (Answer) obj;
+		if (answerCorrect != other.answerCorrect)
+			return false;
+		if (answerText == null) {
+			if (other.answerText != null)
+				return false;
+		} else if (!answerText.equals(other.answerText))
+			return false;
+		return true;
+	}
+    
+
 }
