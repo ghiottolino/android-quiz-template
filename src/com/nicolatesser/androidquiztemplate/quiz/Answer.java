@@ -24,31 +24,34 @@ package com.nicolatesser.androidquiztemplate.quiz;
 /**
  * @author Tobias C. Sutor <tobias@sutor-it.com>
  */
-public class Answer implements Comparable<Answer> {
+public class Answer {
 
-    private final boolean answerCorrect;
-    private final int answerId;
+    private Integer answerId;
     private final String answerText;
+    private final boolean answerCorrect;
 
+    
+    /**
+     * @param answerText the actual text of the answer
+     * @param answerCorrect whether this is an correct answer
+     */
+    public Answer(final String answerText, final boolean answerCorrect) {
+        this(null, answerText,answerCorrect);
+    }
+
+    
     /**
      * @param answerId the unique ID of the answer
      * @param answerText the actual text of the answer
      * @param answerCorrect whether this is an correct answer
      */
-    public Answer(final int answerId, final String answerText, final boolean answerCorrect) {
+    public Answer(final Integer answerId, final String answerText, final boolean answerCorrect) {
         this.answerId = answerId;
         this.answerText = answerText;
         this.answerCorrect = answerCorrect;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see java.lang.Comparable#compareTo(java.lang.Object)
-     */
-    @Override
-    public int compareTo(final Answer another) {
-        return (int) Math.signum((this.answerId - another.getAnswerId()));
-    }
+
 
     /**
      * @return the answerId

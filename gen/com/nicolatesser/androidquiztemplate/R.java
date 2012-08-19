@@ -66,13 +66,13 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int article=0x7f060005;
         public static final int article_fragment=0x7f060009;
         public static final int consecutiveResult=0x7f060010;
+        public static final int error=0x7f06000e;
         public static final int fragment_container=0x7f060007;
         public static final int headlines_fragment=0x7f060008;
         public static final int list=0x7f06000c;
         public static final int menu_refresh=0x7f060004;
         public static final int menu_search=0x7f060013;
         public static final int menu_share=0x7f060014;
-        public static final int output=0x7f06000e;
         public static final int question=0x7f06000b;
         public static final int quiz_feedback_layout=0x7f06000d;
         public static final int quiz_layout=0x7f06000a;

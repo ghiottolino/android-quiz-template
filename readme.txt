@@ -13,3 +13,17 @@ sudo rm /var/www/android/AndroidQuizTemplate.apk
 sudo mv AndroidQuizTemplate.apk /var/www/android/AndroidQuizTemplate.apk
 
 ls
+
+TODOs:
+
+GAME:
+* add generic game
+* add explanations to answers: they could be automatically generated (most feminine words in german finish with e)
+* add generic attribute to questions/answers: they could be used for insert additional information (translation)
+* add statistics
+
+APP:
+*make it a library...somehow...
+
+LAYOUT:
+* add menu icon in the action bar for android 2.x
