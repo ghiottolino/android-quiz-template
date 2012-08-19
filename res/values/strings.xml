@@ -18,6 +18,7 @@
     <string name="app_name">Android Quiz Template</string>
     <string name="alternate_title">An alternate title that is long</string>
     <string name="toggle_title">Toggle title</string>
+    <string name="error_message">Wrong, try again.</string>
     <string name="hello">Hello, Hallo</string>
     <string name="menu_refresh">Refresh</string>
     <string name="menu_search">Search</string>

@@ -39,7 +39,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="@string/hello"
+            android:text="@string/error_message"
             android:textColor="#cc0000"
             android:textSize="@dimen/feedback_size"
             android:textStyle="bold" >

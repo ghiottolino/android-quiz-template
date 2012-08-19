@@ -2,31 +2,31 @@ package com.nicolatesser.androidquiztemplate.quiz;
 
 public class Session {
 
-	private int totalAttempts = 0;
-	private int correctAttempts = 0;
-	private int consecutiveAttempts = 0;
+	private Integer totalAttempts = 0;
+	private Integer correctAttempts = 0;
+	private Integer consecutiveAttempts = 0;
 
-	public int getTotalAttempts() {
+	public Integer getTotalAttempts() {
 		return totalAttempts;
 	}
 
-	public void setTotalAttempts(int totalAttempts) {
+	public void setTotalAttempts(Integer totalAttempts) {
 		this.totalAttempts = totalAttempts;
 	}
 
-	public int getCorrectAttempts() {
+	public Integer getCorrectAttempts() {
 		return correctAttempts;
 	}
 
-	public void setCorrectAttempts(int correctAttempts) {
+	public void setCorrectAttempts(Integer correctAttempts) {
 		this.correctAttempts = correctAttempts;
 	}
 
-	public int getConsecutiveAttempts() {
+	public Integer getConsecutiveAttempts() {
 		return consecutiveAttempts;
 	}
 
-	public void setConsecutiveAttempts(int consecutive) {
+	public void setConsecutiveAttempts(Integer consecutive) {
 		this.consecutiveAttempts = consecutive;
 	}
 

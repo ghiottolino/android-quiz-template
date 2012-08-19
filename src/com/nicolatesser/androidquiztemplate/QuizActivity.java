@@ -23,9 +23,11 @@ import com.nicolatesser.androidquiztemplate.actionbarcompat.ActionBarActivity;
 import com.nicolatesser.androidquiztemplate.quiz.Answer;
 import com.nicolatesser.androidquiztemplate.quiz.Game;
 import com.nicolatesser.androidquiztemplate.quiz.Question;
+import com.nicolatesser.androidquiztemplate.quiz.Session;
 
 import android.content.Context;
 import android.content.Intent;
+import android.opengl.Visibility;
 import android.os.Bundle;
 
 import android.view.Menu;
@@ -40,9 +42,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Button;
 
-public class QuizActivity extends ActionBarActivity{
-	
-	
+public class QuizActivity extends ActionBarActivity {
+
 	private TextView questionTextView;
 	private TextView errorTextView;
 	private TextView totalResultTextView;
@@ -50,7 +51,7 @@ public class QuizActivity extends ActionBarActivity{
 	private TextView recordTextView;
 	private ListView mListView;
 	private ListAdapter adapter;
-	
+
 	private Game game;
 	private Question question;
 
@@ -65,74 +66,109 @@ public class QuizActivity extends ActionBarActivity{
 		consecutiveResultTextView = (TextView) findViewById(R.id.consecutiveResult);
 		recordTextView = (TextView) findViewById(R.id.record);
 		errorTextView = (TextView) findViewById(R.id.error);
-		errorTextView.setVisibility(0);
-		errorTextView.setText("");
+		errorTextView.setVisibility(View.GONE);
 		mListView = (ListView) findViewById(R.id.list);
-		
-		
+
 		initGame();
 		this.question = this.game.getQuestion();
 		displayQuestion(question);
-		
 
 	}
-	
-	public void displayQuestion(final Question question)
-	{
+
+	public void displayQuestion(final Question question) {
 		questionTextView.setText(question.getQuestionText());
-		OnClickListener listener= new OnClickListener() {
+		OnClickListener listener = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				Button button = (Button) v;
 				Answer answer = new Answer(button.getText().toString(), true);
-				checkAnswer(answer);
+				boolean checkAnswer = checkAnswer(answer);
+				if (!checkAnswer)
+				{
+					button.setEnabled(false);					
+				}
 
 			}
 		};
-		adapter = new AnswerAdapter(this, R.id.answer, question.getAnswers(),listener);
+		adapter = new AnswerAdapter(this, R.id.answer, question.getAnswers(),
+				listener);
 		mListView.setAdapter(adapter);
 	}
-	
-	public void checkAnswer(Answer answer)
-	{
-		boolean checkAnswer = game.checkAnswer(question,answer);
-		showTextToClipboardNotification("correctness: "+checkAnswer);
-		if (checkAnswer)
-		{
+
+	public boolean checkAnswer(Answer answer) {
+		boolean checkAnswer = game.checkAnswer(question, answer);
+		showTextToClipboardNotification("correctness: " + checkAnswer);
+		if (checkAnswer) {
 			question = game.getQuestion();
-			displayQuestion(question);		
+			displayQuestion(question);
+			errorTextView.setVisibility(View.GONE);
 		}
+		else
+		{
+			errorTextView.setVisibility(View.VISIBLE);
+		}
+		showFeedback(this.game.getSession());
+		return checkAnswer;
+	}
+
+	public void showFeedback(Session session) {
+
+		totalResultTextView.setText("total: " + session.getCorrectAttempts().toString()
+				+ "/" + session.getTotalAttempts().toString());
+		consecutiveResultTextView.setText("consecutive: "
+				+ session.getConsecutiveAttempts().toString());
+		
+		// TODO: implement record
+		recordTextView.setText("record: TODO");
 	}
 
 	public void initGame() {
 		List<Question> questions = new Vector<Question>();
-		List<Answer> answers = new Vector<Answer>();
+		List<Answer> answers1 = new Vector<Answer>();
+		List<Answer> answers2 = new Vector<Answer>();
+		List<Answer> answers3 = new Vector<Answer>();
+		List<Answer> answers4 = new Vector<Answer>();
 
-		Answer answer1 = new Answer("answer 1", false);
-		Answer answer2 = new Answer("answer 2", true);
-		Answer answer3 = new Answer("answer 3", false);
-		Answer answer4 = new Answer("answer 4", false);
-		answers.add(answer1);
-		answers.add(answer2);
-		answers.add(answer3);
-		answers.add(answer4);
+		Answer answer1false = new Answer("answer 1", false);
+		Answer answer2false = new Answer("answer 2", false);
+		Answer answer3false = new Answer("answer 3", false);
+		Answer answer4false = new Answer("answer 4", false);
+		Answer answer1true = new Answer("answer 1", true);
+		Answer answer2true = new Answer("answer 2", true);
+		Answer answer3true = new Answer("answer 3", true);
+		Answer answer4true = new Answer("answer 4", true);
 
-		Question question1 = new Question("question 1", answers);
-		Question question2 = new Question("question 2", answers);
+		answers1.add(answer1true);
+		answers1.add(answer2false);
+		answers1.add(answer3false);
+
+		answers2.add(answer1false);
+		answers2.add(answer2true);
+		answers2.add(answer3false);
+		answers2.add(answer4false);
+
+		answers3.add(answer1false);
+		answers3.add(answer2true);
+		answers3.add(answer3true);
+
+		answers4.add(answer1false);
+		answers4.add(answer2true);
+		answers4.add(answer3false);
+		answers4.add(answer4true);
+
+		Question question1 = new Question("question 1", answers1);
+		Question question2 = new Question("question 2", answers2);
+		Question question3 = new Question("question 3", answers3);
+		Question question4 = new Question("question 4", answers4);
 
 		questions.add(question1);
 		questions.add(question2);
+		questions.add(question3);
+		questions.add(question4);
 
 		this.game = new Game(questions);
 	}
 
-	
-	
-	
-	
-	
-	
-	
 	protected void showTextToClipboardNotification(String text) {
 		Context context = getApplicationContext();
 		int duration = Toast.LENGTH_SHORT;
@@ -140,8 +176,6 @@ public class QuizActivity extends ActionBarActivity{
 		toast.show();
 
 	}
-	
-	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -185,7 +219,5 @@ public class QuizActivity extends ActionBarActivity{
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
-
 
 }

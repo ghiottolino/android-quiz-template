@@ -36,6 +36,18 @@ public class Game {
 	public void setQuestions(List<Question> questions) {
 		this.questions = questions;
 	}
+	
+	
+
+	public Session getSession() {
+		return session;
+	}
+
+
+	public void setSession(Session session) {
+		this.session = session;
+	}
+
 
 	public Question getQuestion()
 	{
@@ -111,5 +123,8 @@ public class Game {
 		}
 		return correct;
 	}
+
+
+	
 	
 }
