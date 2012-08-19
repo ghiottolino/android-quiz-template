@@ -25,6 +25,7 @@ import com.nicolatesser.androidquiztemplate.quiz.Game;
 import com.nicolatesser.androidquiztemplate.quiz.Question;
 import com.nicolatesser.androidquiztemplate.quiz.Session;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -49,7 +50,7 @@ public class QuizActivity extends ActionBarActivity {
 
 	public static final String SESSION_PREF_KEY = "SESSION";
 
-	public static final String PREFS_NAME = "ANDROID_QUIZ_TEMPLATE";
+	private String settingPrefixName = "ANDROID_QUIZ_TEMPLATE";
 
 	private TextView questionTextView;
 	private TextView errorTextView;
@@ -77,27 +78,53 @@ public class QuizActivity extends ActionBarActivity {
 
 		// TODO : load session
 		initGame();
-		this.question = this.game.getQuestion();
-		displayQuestion(question);
-		showFeedback(game.getSession());
+		displayNextQuestion();
 	}
-	
+
 	@Override
 	public void onResume() {
 		// TODO : load session
 		super.onResume();
-		initGame();
+		loadSession();
 	}
-	
+
 	@Override
 	public void onPause() {
 		// TODO : save session
 		super.onPause();
 		Session session = this.game.getSession();
-		saveStringFieldInPreferences(SESSION_PREF_KEY, session.toString());		
+		saveStringFieldInPreferences(SESSION_PREF_KEY, session.toString());
+	}
+
+	public String getSettingPrefixName() {
+		return settingPrefixName;
+	}
+
+	public void setSettingPrefixName(String settingPrefixName) {
+		this.settingPrefixName = settingPrefixName;
+	}
+
+	public Game getGame() {
+		return game;
+	}
+
+	public void setGame(Game game) {
+		this.game = game;
 	}
 	
+	public void setHomeActivity(Activity activity)
+	{
+		// TODO : set the home activity for the action bar
+	}
 
+	public void displayNextQuestion()
+	{
+		this.question = this.game.getQuestion();
+		displayQuestion(question);
+		showFeedback(game.getSession());
+		errorTextView.setVisibility(View.GONE);
+	}
+	
 	public void displayQuestion(final Question question) {
 		questionTextView.setText(question.getQuestionText());
 		OnClickListener listener = new OnClickListener() {
@@ -126,9 +153,7 @@ public class QuizActivity extends ActionBarActivity {
 				showTextToClipboardNotification("Congratulations, you set a new record: "
 						+ currentRecord);
 			}
-			question = game.getQuestion();
-			displayQuestion(question);
-			errorTextView.setVisibility(View.GONE);
+			displayNextQuestion();
 		} else {
 			errorTextView.setVisibility(View.VISIBLE);
 		}
@@ -145,18 +170,15 @@ public class QuizActivity extends ActionBarActivity {
 				+ session.getConsecutiveAttempts().toString());
 		recordTextView.setText("record: " + this.game.getRecord());
 	}
-	
+
 	public void reset() {
 		saveIntFieldInPreferences(RECORD_PREF_KEY, 0);
 		Session newSession = new Session();
 		game.setRecord(0);
 		game.setSession(newSession);
-		this.question = this.game.getQuestion();
-		displayQuestion(question);
-		showFeedback(game.getSession());	
-		errorTextView.setVisibility(View.GONE);
+		displayNextQuestion();
 	}
-		
+
 	public void initGame() {
 		List<Question> questions = new Vector<Question>();
 		List<Answer> answers1 = new Vector<Answer>();
@@ -202,40 +224,42 @@ public class QuizActivity extends ActionBarActivity {
 		questions.add(question4);
 
 		Integer record = getIntFieldInPreferences(RECORD_PREF_KEY);
-		String serializedSession = getStringFieldInPreferences(SESSION_PREF_KEY);
-		
 		this.game = new Game(questions, record);
+		loadSession();
+	}
+	
+	protected void loadSession()
+	{
+		String serializedSession = getStringFieldInPreferences(SESSION_PREF_KEY);
 		this.game.setSession(new Session(serializedSession));
 	}
 
 	protected Integer getIntFieldInPreferences(String fieldName) {
 
-		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+		SharedPreferences settings = getSharedPreferences(settingPrefixName, 0);
 		int field = settings.getInt(fieldName, 0);
 		return field;
 	}
-	
 
 	protected String getStringFieldInPreferences(String fieldName) {
-		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+		SharedPreferences settings = getSharedPreferences(settingPrefixName, 0);
 		String field = settings.getString(fieldName, "");
 		return field;
 	}
 
 	protected void saveIntFieldInPreferences(String fieldName, Integer n) {
 
-		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+		SharedPreferences settings = getSharedPreferences(settingPrefixName, 0);
 		SharedPreferences.Editor editor = settings.edit();
 		editor.putInt(fieldName, n);
 
 		// Commit the edits!
 		boolean commit = editor.commit();
 	}
-	
 
 	protected void saveStringFieldInPreferences(String fieldName, String value) {
 
-		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+		SharedPreferences settings = getSharedPreferences(settingPrefixName, 0);
 		SharedPreferences.Editor editor = settings.edit();
 		editor.putString(fieldName, value);
 
@@ -264,14 +288,13 @@ public class QuizActivity extends ActionBarActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home:
+		int itemId = item.getItemId();
+
+		if (itemId == android.R.id.home) {
 			Toast.makeText(this, "Tapped home", Toast.LENGTH_SHORT).show();
 			Intent myIntent = new Intent(this, QuizActivity.class);
 			startActivityForResult(myIntent, 0);
-			break;
-
-		case R.id.menu_refresh:
+		} else if (itemId == R.id.menu_refresh) {
 			Toast.makeText(this, "Fake refreshing...", Toast.LENGTH_SHORT)
 					.show();
 			getActionBarHelper().setRefreshActionItemState(true);
@@ -281,23 +304,14 @@ public class QuizActivity extends ActionBarActivity {
 					getActionBarHelper().setRefreshActionItemState(false);
 				}
 			}, 1000);
-			break;
-
-		case R.id.menu_search:
+		} else if (itemId == R.id.menu_search) {
 			Toast.makeText(this, "Tapped search", Toast.LENGTH_SHORT).show();
-			break;
-
-		case R.id.menu_share:
+		} else if (itemId == R.id.menu_share) {
 			Toast.makeText(this, "Tapped share", Toast.LENGTH_SHORT).show();
-			break;
-
-		case R.id.menu_menu:
+		} else if (itemId == R.id.menu_menu) {
 			this.openOptionsMenu();
-			break;
-
-		case R.id.menu_reset:
+		} else if (itemId == R.id.menu_reset) {
 			reset();
-			break;
 		}
 
 		return super.onOptionsItemSelected(item);

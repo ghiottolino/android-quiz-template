@@ -106,14 +106,15 @@ public class MainActivity extends ActionBarActivity
     
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
+    	int itemId = item.getItemId();
+
+		if (itemId == android.R.id.home){
                 Toast.makeText(this, "Tapped home", Toast.LENGTH_SHORT).show();
                 Intent myIntent = new Intent(this, MainActivity.class);
     			startActivityForResult(myIntent, 0);
-                break;
-
-            case R.id.menu_refresh:
+		}
+		else if (itemId == R.id.menu_refresh)
+		{
                 Toast.makeText(this, "Fake refreshing...", Toast.LENGTH_SHORT).show();
                 getActionBarHelper().setRefreshActionItemState(true);
                 getWindow().getDecorView().postDelayed(
@@ -123,15 +124,14 @@ public class MainActivity extends ActionBarActivity
                                 getActionBarHelper().setRefreshActionItemState(false);
                             }
                         }, 1000);
-                break;
-
-            case R.id.menu_search:
+		}
+		else if (itemId == R.id.menu_search)
+		{
                 Toast.makeText(this, "Tapped search", Toast.LENGTH_SHORT).show();
-                break;
-
-            case R.id.menu_share:
+		}
+		else if (itemId == R.id.menu_share)
+		{
                 Toast.makeText(this, "Tapped share", Toast.LENGTH_SHORT).show();
-                break;
         }
         return super.onOptionsItemSelected(item);
     }

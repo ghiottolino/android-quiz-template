@@ -29,5 +29,7 @@ GAME:
 APP:
 *make it a library...somehow...
 
+* add other apps button
+
 LAYOUT:
 * look for icons
