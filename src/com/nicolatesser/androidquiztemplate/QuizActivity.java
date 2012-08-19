@@ -47,6 +47,8 @@ public class QuizActivity extends ActionBarActivity {
 
 	public static final String RECORD_PREF_KEY = "RECORD";
 
+	public static final String SESSION_PREF_KEY = "SESSION";
+
 	public static final String PREFS_NAME = "ANDROID_QUIZ_TEMPLATE";
 
 	private TextView questionTextView;
@@ -73,11 +75,28 @@ public class QuizActivity extends ActionBarActivity {
 		errorTextView.setVisibility(View.GONE);
 		mListView = (ListView) findViewById(R.id.list);
 
+		// TODO : load session
 		initGame();
 		this.question = this.game.getQuestion();
 		displayQuestion(question);
 		showFeedback(game.getSession());
 	}
+	
+	@Override
+	public void onResume() {
+		// TODO : load session
+		super.onResume();
+		initGame();
+	}
+	
+	@Override
+	public void onPause() {
+		// TODO : save session
+		super.onPause();
+		Session session = this.game.getSession();
+		saveStringFieldInPreferences(SESSION_PREF_KEY, session.toString());		
+	}
+	
 
 	public void displayQuestion(final Question question) {
 		questionTextView.setText(question.getQuestionText());
@@ -103,7 +122,7 @@ public class QuizActivity extends ActionBarActivity {
 		if (checkAnswer) {
 			if (game.isNewRecord()) {
 				int currentRecord = game.getSession().getConsecutiveAttempts();
-				saveFieldInPreferences(RECORD_PREF_KEY, currentRecord);
+				saveIntFieldInPreferences(RECORD_PREF_KEY, currentRecord);
 				showTextToClipboardNotification("Congratulations, you set a new record: "
 						+ currentRecord);
 			}
@@ -128,13 +147,14 @@ public class QuizActivity extends ActionBarActivity {
 	}
 	
 	public void reset() {
-		saveFieldInPreferences(RECORD_PREF_KEY, 0);
+		saveIntFieldInPreferences(RECORD_PREF_KEY, 0);
 		Session newSession = new Session();
 		game.setRecord(0);
 		game.setSession(newSession);
 		this.question = this.game.getQuestion();
 		displayQuestion(question);
 		showFeedback(game.getSession());	
+		errorTextView.setVisibility(View.GONE);
 	}
 		
 	public void initGame() {
@@ -181,22 +201,43 @@ public class QuizActivity extends ActionBarActivity {
 		questions.add(question3);
 		questions.add(question4);
 
-		Integer record = getFieldInPreferences(RECORD_PREF_KEY);
+		Integer record = getIntFieldInPreferences(RECORD_PREF_KEY);
+		String serializedSession = getStringFieldInPreferences(SESSION_PREF_KEY);
+		
 		this.game = new Game(questions, record);
+		this.game.setSession(new Session(serializedSession));
 	}
 
-	protected Integer getFieldInPreferences(String fieldName) {
+	protected Integer getIntFieldInPreferences(String fieldName) {
 
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-		int record = settings.getInt(fieldName, 0);
-		return record;
+		int field = settings.getInt(fieldName, 0);
+		return field;
+	}
+	
+
+	protected String getStringFieldInPreferences(String fieldName) {
+		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+		String field = settings.getString(fieldName, "");
+		return field;
 	}
 
-	protected void saveFieldInPreferences(String fieldName, Integer n) {
+	protected void saveIntFieldInPreferences(String fieldName, Integer n) {
 
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 		SharedPreferences.Editor editor = settings.edit();
 		editor.putInt(fieldName, n);
+
+		// Commit the edits!
+		boolean commit = editor.commit();
+	}
+	
+
+	protected void saveStringFieldInPreferences(String fieldName, String value) {
+
+		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putString(fieldName, value);
 
 		// Commit the edits!
 		boolean commit = editor.commit();
@@ -252,7 +293,6 @@ public class QuizActivity extends ActionBarActivity {
 
 		case R.id.menu_menu:
 			this.openOptionsMenu();
-			Toast.makeText(this, "Tapped menu", Toast.LENGTH_SHORT).show();
 			break;
 
 		case R.id.menu_reset:
