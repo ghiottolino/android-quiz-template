@@ -2,13 +2,14 @@ INSTRUCTIONS FOR BUILDING
 
 cd /home/tex/android-sdks/platform-tools
 
-jarsigner -verbose -keystore android.keystore AndroidTemplate.apk android
+jarsigner -verbose -keystore android.keystore android-quiz-template.apk android
 
-/home/tex/android-sdks/tools/zipalign -v 4 /home/tex/android-sdks/platform-tools/AndroidTemplate.apk /home/tex/android-sdks/platform-tools/AndroidAppTemplate.apk
+/home/tex/android-sdks/tools/zipalign -v 4 /home/tex/android-sdks/platform-tools/android-quiz-template.apk /home/tex/android-sdks/platform-tools/AndroidQuizTemplate.apk
  
-rm AndroidTemplate.apk
+rm android-quiz-template.apk
 
-sudo rm /var/www/android/AndroidAppTemplate.apk
+sudo rm /var/www/android/AndroidQuizTemplate.apk
 
-sudo mv AndroidAppTemplate.apk /var/www/android/AndroidAppTemplate.apk
+sudo mv AndroidQuizTemplate.apk /var/www/android/AndroidQuizTemplate.apk
 
+ls

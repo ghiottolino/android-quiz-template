@@ -41,6 +41,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int actionbar_compat_button_home_width=0x7f050002;
         public static final int actionbar_compat_button_width=0x7f050001;
         public static final int actionbar_compat_height=0x7f050000;
+        public static final int button_size=0x7f050004;
+        public static final int feedback_size=0x7f050005;
+        public static final int question_size=0x7f050003;
     }
     public static final class drawable {
         public static final int actionbar_compat_item=0x7f020000;
@@ -59,22 +62,23 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int actionbar_compat_item_refresh=0x7f060003;
         public static final int actionbar_compat_item_refresh_progress=0x7f060002;
         public static final int actionbar_compat_title=0x7f060001;
-        public static final int answer=0x7f060011;
+        public static final int answer=0x7f060012;
         public static final int article=0x7f060005;
         public static final int article_fragment=0x7f060009;
-        public static final int consecutiveResult=0x7f06000f;
+        public static final int consecutiveResult=0x7f060010;
         public static final int fragment_container=0x7f060007;
         public static final int headlines_fragment=0x7f060008;
         public static final int list=0x7f06000c;
         public static final int menu_refresh=0x7f060004;
-        public static final int menu_search=0x7f060012;
-        public static final int menu_share=0x7f060013;
-        public static final int output=0x7f06000d;
-        public static final int record=0x7f060010;
+        public static final int menu_search=0x7f060013;
+        public static final int menu_share=0x7f060014;
+        public static final int output=0x7f06000e;
+        public static final int question=0x7f06000b;
+        public static final int quiz_feedback_layout=0x7f06000d;
+        public static final int quiz_layout=0x7f06000a;
+        public static final int record=0x7f060011;
         public static final int toggle_title=0x7f060006;
-        public static final int totalResult=0x7f06000e;
-        public static final int widget32=0x7f06000a;
-        public static final int word=0x7f06000b;
+        public static final int totalResult=0x7f06000f;
     }
     public static final class layout {
         public static final int actionbar_compat=0x7f030000;

@@ -15,11 +15,7 @@
   -->
 
 <resources>
-    <string name="app_name">Android Quiz Template</string>
-    <string name="alternate_title">An alternate title that is long</string>
-    <string name="toggle_title">Toggle title</string>
-    <string name="hello">Hello, Hallo</string>
-    <string name="menu_refresh">Refresh</string>
-    <string name="menu_search">Search</string>
-    <string name="menu_share">Share</string>
+    <dimen name="question_size">90dp</dimen>
+    <dimen name="button_size">60dp</dimen>
+    <dimen name="feedback_size">30dp</dimen> 
 </resources>

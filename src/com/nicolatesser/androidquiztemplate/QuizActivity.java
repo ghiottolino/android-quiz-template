@@ -42,7 +42,7 @@ public class QuizActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quiz);
         // TODO : ansers must be replaced
-        String[] answers = new String[]{"answer 1","answer 2"};
+        String[] answers = new String[]{"answer 1","answer 2","answer 3","answer 4"};
         mListView = (ListView) findViewById(R.id.list);
 		adapter = new AnswerAdapter (this,R.id.answer,answers);	
 		mListView.setAdapter(adapter);

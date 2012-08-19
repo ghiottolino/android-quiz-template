@@ -2,6 +2,7 @@ package com.nicolatesser.androidquiztemplate;
 
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -23,20 +24,19 @@ public class AnswerAdapter extends ArrayAdapter<String>{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
  
-        Button button;           
 
-        if (convertView == null) {
-        	button = new Button(context);
-        }
-        else
-        {
-            button = (Button)convertView;           
-
-        }
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View v = inflater.inflate(R.layout.quiz_answer, parent, false);
+        Button button = (Button) v.findViewById(R.id.answer);
         String answer = data[position];
         button.setText(answer);
+
+        //fix the height
+        int height = parent.getHeight();    
+        int targetHeight = (int) Math.floor(height/(data.length));
+        button.setHeight(targetHeight);
        
-        return button;
+        return v;
     }
    
 }
