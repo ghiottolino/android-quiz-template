@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Random;
 
 public class Game {
+	
+	private int record;
 
 	private Session session;
 	
@@ -18,12 +20,20 @@ public class Game {
 	private Random rg = new Random();
 
 	
-	public Game(List<Question> questions)
+	public Game(List<Question> questions, Integer record)
 	{
 		// TODO: load question, etc...
 		this.questions=questions;
 		this.recentlyWronglyAnsweredQuestions = new LinkedList<Question>();
 		this.session=new Session();
+		if (record==null)
+		{
+			this.record=0;
+		}
+		else
+		{
+			this.record=record;
+		}
 	}
 	
 	
@@ -123,7 +133,26 @@ public class Game {
 		}
 		return correct;
 	}
+	
+	public boolean isNewRecord()
+	{
+		if (session.getConsecutiveAttempts()>this.record)
+		{
+			this.record=session.getConsecutiveAttempts();
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	public int getRecord()
+	{
+		return this.record;
+	}
 
+	
 
 	
 	

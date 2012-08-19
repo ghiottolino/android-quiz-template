@@ -27,6 +27,7 @@ import com.nicolatesser.androidquiztemplate.quiz.Session;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.opengl.Visibility;
 import android.os.Bundle;
 
@@ -43,7 +44,11 @@ import android.widget.Toast;
 import android.widget.Button;
 
 public class QuizActivity extends ActionBarActivity {
-
+	
+	public static final String RECORD_PREF_KEY = "RECORD";
+	
+	public static final String PREFS_NAME = "ANDROID_QUIZ_TEMPLATE";
+	
 	private TextView questionTextView;
 	private TextView errorTextView;
 	private TextView totalResultTextView;
@@ -51,7 +56,6 @@ public class QuizActivity extends ActionBarActivity {
 	private TextView recordTextView;
 	private ListView mListView;
 	private ListAdapter adapter;
-
 	private Game game;
 	private Question question;
 
@@ -97,8 +101,12 @@ public class QuizActivity extends ActionBarActivity {
 
 	public boolean checkAnswer(Answer answer) {
 		boolean checkAnswer = game.checkAnswer(question, answer);
-		showTextToClipboardNotification("correctness: " + checkAnswer);
 		if (checkAnswer) {
+			if (game.isNewRecord()){
+				int currentRecord = game.getSession().getConsecutiveAttempts();
+				saveFieldInPreferences(RECORD_PREF_KEY, currentRecord);
+				showTextToClipboardNotification("Congratulations, you set a new record: "+currentRecord);
+			}
 			question = game.getQuestion();
 			displayQuestion(question);
 			errorTextView.setVisibility(View.GONE);
@@ -117,9 +125,7 @@ public class QuizActivity extends ActionBarActivity {
 				+ "/" + session.getTotalAttempts().toString());
 		consecutiveResultTextView.setText("consecutive: "
 				+ session.getConsecutiveAttempts().toString());
-		
-		// TODO: implement record
-		recordTextView.setText("record: TODO");
+		recordTextView.setText("record: "+this.game.getRecord());
 	}
 
 	public void initGame() {
@@ -166,9 +172,28 @@ public class QuizActivity extends ActionBarActivity {
 		questions.add(question3);
 		questions.add(question4);
 
-		this.game = new Game(questions);
+		Integer record = getFieldInPreferences(RECORD_PREF_KEY);
+		this.game = new Game(questions,record);
 	}
 
+	protected Integer getFieldInPreferences(String fieldName) {
+
+    	SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+    	int record = settings.getInt(fieldName, 0);
+    	return record;
+	}
+	
+	protected void saveFieldInPreferences(String fieldName, Integer n) {
+
+    	SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putInt(fieldName, n);
+
+		// Commit the edits!
+		boolean commit = editor.commit();
+	}
+	
+	
 	protected void showTextToClipboardNotification(String text) {
 		Context context = getApplicationContext();
 		int duration = Toast.LENGTH_SHORT;
