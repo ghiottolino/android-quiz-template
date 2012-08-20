@@ -63,7 +63,7 @@ public class MainActivity extends ActionBarActivity {
 		int itemId = item.getItemId();
 
 		if (itemId == android.R.id.home) {
-			Toast.makeText(this, "Tapped home", Toast.LENGTH_SHORT).show();
+			//do nothing
 		} else if (itemId == R.id.menu_refresh) {
 
 			Toast.makeText(this, "Fake refreshing...", Toast.LENGTH_SHORT)
