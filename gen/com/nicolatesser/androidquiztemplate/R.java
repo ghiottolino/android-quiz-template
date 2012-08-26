@@ -57,8 +57,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static int ic_home=0x7f020008;
         public static int ic_launcher=0x7f020009;
         public static int ic_menu_menu=0x7f02000a;
-        public static int ic_menu_reset=0x7f02000b;
-        public static int ic_menu_share=0x7f02000c;
+        public static int ic_menu_other_apps=0x7f02000b;
+        public static int ic_menu_reset=0x7f02000c;
+        public static int ic_menu_share=0x7f02000d;
     }
     public static final class id {
         public static int actionbar_compat=0x7f060000;
@@ -73,11 +74,12 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static int fragment_container=0x7f060007;
         public static int headlines_fragment=0x7f060008;
         public static int list=0x7f06000c;
-        public static int menu_menu=0x7f060016;
+        public static int menu_menu=0x7f060017;
+        public static int menu_other_apps=0x7f060015;
         public static int menu_refresh=0x7f060004;
         public static int menu_reset=0x7f060014;
         public static int menu_search=0x7f060013;
-        public static int menu_share=0x7f060015;
+        public static int menu_share=0x7f060016;
         public static int question=0x7f06000b;
         public static int quiz_feedback_layout=0x7f06000d;
         public static int quiz_layout=0x7f06000a;
@@ -103,6 +105,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static int error_message=0x7f070003;
         public static int hello=0x7f070004;
         public static int menu_menu=0x7f070008;
+        public static int menu_other_apps=0x7f07000a;
         public static int menu_refresh=0x7f070005;
         public static int menu_reset=0x7f070009;
         public static int menu_search=0x7f070006;

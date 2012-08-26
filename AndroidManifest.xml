@@ -18,7 +18,8 @@ limitations under the License.
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.nicolatesser.androidquiztemplate"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0"
+    android:installLocation="preferExternal" >
 
     <uses-sdk android:minSdkVersion="4" android:targetSdkVersion="15" />
 

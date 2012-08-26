@@ -29,6 +29,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.opengl.Visibility;
 import android.os.Bundle;
 
@@ -291,10 +292,19 @@ public class QuizActivity extends ActionBarActivity {
 		int itemId = item.getItemId();
 
 		if (itemId == android.R.id.home) {
-			Toast.makeText(this, "Tapped home", Toast.LENGTH_SHORT).show();
-			Intent myIntent = new Intent(this, QuizActivity.class);
-			startActivityForResult(myIntent, 0);
-		} else if (itemId == R.id.menu_refresh) {
+			// do nothing
+		} 
+		else if (itemId == R.id.menu_other_apps) {
+
+			Intent goToMarket; 
+			goToMarket = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pub:\"Nicola Tesser\"")); 
+			startActivity(goToMarket); 
+		}
+		else if (itemId == R.id.menu_reset) {
+			reset();
+		}
+		
+		else if (itemId == R.id.menu_refresh) {
 			Toast.makeText(this, "Fake refreshing...", Toast.LENGTH_SHORT)
 					.show();
 			getActionBarHelper().setRefreshActionItemState(true);
@@ -310,9 +320,7 @@ public class QuizActivity extends ActionBarActivity {
 			Toast.makeText(this, "Tapped share", Toast.LENGTH_SHORT).show();
 		} else if (itemId == R.id.menu_menu) {
 			this.openOptionsMenu();
-		} else if (itemId == R.id.menu_reset) {
-			reset();
-		}
+		} 
 
 		return super.onOptionsItemSelected(item);
 	}
