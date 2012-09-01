@@ -138,7 +138,7 @@ public class SettingsActivity extends ActionBarActivity {
 					Uri.parse("market://search?q=pub:\"Nicola Tesser\""));
 			startActivity(goToMarket);
 		} else if (itemId == R.id.menu_settings) {
-			// do nothing, app caller should do something
+			this.openOptionsMenu();
 		}
 
 		return super.onOptionsItemSelected(item);

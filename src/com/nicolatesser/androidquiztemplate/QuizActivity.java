@@ -258,7 +258,7 @@ public class QuizActivity extends ActionBarActivity {
 			reset();
 		}
 		else if (itemId == R.id.menu_settings) {
-			// do nothing, app caller should do something
+			this.openOptionsMenu();
 		}
 		return super.onOptionsItemSelected(item);
 	}

@@ -4,15 +4,6 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     >
-	<TextView
-            android:id="@+id/text"
-            android:textColor="?android:textColorPrimary"
-            android:textSize="17dp"
-            android:text="@string/settings"
-            android:background="@android:drawable/title_bar"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" 
-            android:focusable="true"/>
     <ListView
             android:id="@+id/list"
             android:layout_width="fill_parent"

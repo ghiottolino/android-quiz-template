@@ -75,21 +75,20 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static int fragment_container=0x7f060007;
         public static int headlines_fragment=0x7f060008;
         public static int list=0x7f06000c;
-        public static int menu_menu=0x7f06001a;
-        public static int menu_other_apps=0x7f060018;
+        public static int menu_menu=0x7f060019;
+        public static int menu_other_apps=0x7f060017;
         public static int menu_refresh=0x7f060004;
-        public static int menu_reset=0x7f060017;
-        public static int menu_search=0x7f060016;
-        public static int menu_settings=0x7f060015;
-        public static int menu_share=0x7f060019;
+        public static int menu_reset=0x7f060016;
+        public static int menu_search=0x7f060015;
+        public static int menu_settings=0x7f060014;
+        public static int menu_share=0x7f060018;
         public static int question=0x7f06000b;
         public static int quiz_feedback_layout=0x7f06000d;
         public static int quiz_layout=0x7f06000a;
         public static int record=0x7f060011;
-        public static int text=0x7f060013;
         public static int toggle_title=0x7f060006;
         public static int totalResult=0x7f06000f;
-        public static int value=0x7f060014;
+        public static int value=0x7f060013;
     }
     public static final class layout {
         public static int actionbar_compat=0x7f030000;
