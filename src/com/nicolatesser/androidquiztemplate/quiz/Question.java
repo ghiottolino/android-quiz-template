@@ -29,12 +29,11 @@ import java.util.Map;
 /**
  * @author Tobias C. Sutor <tobias@sutor-it.com>
  */
-// TODO: implement images
 public class Question {
 
 	private List<Answer> answers;
 	private List<Answer> correctAnswers;
-	private Integer categoryId;
+	private List<String> categories;
 	private String explanation;
 	private String imageId;
 	private boolean markedForReview = false;
@@ -62,6 +61,10 @@ public class Question {
 	public Question(String questionText, List<Answer> answers) {
 		this(null, questionText, null, null, null, answers);
 	}
+	
+	public Question(String questionText, List<Answer> answers, List<String> categories) {
+		this(null, questionText, null, null, categories, answers);
+	}
 
 	/**
 	 * @param categoryId
@@ -75,10 +78,10 @@ public class Question {
 	 * @param explanation
 	 *            an explanation why which answer is correct or not
 	 */
-	public Question(final Integer categoryId, final Integer questionId,
+	public Question(List<String> categories, final Integer questionId,
 			final String questionText, final String imageId,
 			final String explanation) {
-		this(questionId, questionText, imageId, explanation, categoryId,
+		this(questionId, questionText, imageId, explanation, categories,
 				new LinkedList<Answer>());
 	}
 
@@ -99,12 +102,12 @@ public class Question {
 	@SuppressWarnings("boxing")
 	public Question(final Integer questionId, final String questionText,
 			final String imageId, final String explanation,
-			final Integer categoryId, final List<Answer> answers) {
+			final List<String> categories, final List<Answer> answers) {
 		this.questionId = questionId;
 		this.questionText = questionText;
 		this.imageId = imageId;
 		this.explanation = explanation;
-		this.categoryId = categoryId;
+		this.categories = categories;
 		this.answers = answers;
 		this.correctAnswers = new LinkedList<Answer>();
 		for (final Answer a : this.answers) {
@@ -142,12 +145,7 @@ public class Question {
 		return this.answers.toArray(new Answer[this.answers.size()]);
 	}
 
-	/**
-	 * @return the category
-	 */
-	public int getCategoryId() {
-		return this.categoryId;
-	}
+
 
 	/**
 	 * @return the explanation
@@ -208,4 +206,13 @@ public class Question {
 		this.markedForReview = markedForReview;
 	}
 
+	public List<String> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<String> categories) {
+		this.categories = categories;
+	}
+
+	
 }

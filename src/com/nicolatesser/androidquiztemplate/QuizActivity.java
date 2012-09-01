@@ -24,6 +24,7 @@ import com.nicolatesser.androidquiztemplate.quiz.Answer;
 import com.nicolatesser.androidquiztemplate.quiz.Game;
 import com.nicolatesser.androidquiztemplate.quiz.Question;
 import com.nicolatesser.androidquiztemplate.quiz.Session;
+import com.nicolatesser.androidquiztemplate.quiz.Settings;
 
 import android.app.Activity;
 import android.content.Context;
@@ -50,9 +51,9 @@ public class QuizActivity extends ActionBarActivity {
 	public static final String RECORD_PREF_KEY = "RECORD";
 
 	public static final String SESSION_PREF_KEY = "SESSION";
-
-	private String settingPrefixName = "ANDROID_QUIZ_TEMPLATE";
-
+	
+	public static final String SETTINGS_PREF_KEY = "SETTINGS";
+	
 	private TextView questionTextView;
 	private TextView errorTextView;
 	private TextView totalResultTextView;
@@ -60,7 +61,6 @@ public class QuizActivity extends ActionBarActivity {
 	private TextView recordTextView;
 	private ListView mListView;
 	private ListAdapter adapter;
-	private Game game;
 	private Question question;
 
 	/** Called when the activity is first created. */
@@ -87,30 +87,15 @@ public class QuizActivity extends ActionBarActivity {
 		// TODO : load session
 		super.onResume();
 		loadSession();
+		loadSettings();
 	}
 
 	@Override
 	public void onPause() {
 		// TODO : save session
 		super.onPause();
-		Session session = this.game.getSession();
+		Session session = Game.getInstance().getSession();
 		saveStringFieldInPreferences(SESSION_PREF_KEY, session.toString());
-	}
-
-	public String getSettingPrefixName() {
-		return settingPrefixName;
-	}
-
-	public void setSettingPrefixName(String settingPrefixName) {
-		this.settingPrefixName = settingPrefixName;
-	}
-
-	public Game getGame() {
-		return game;
-	}
-
-	public void setGame(Game game) {
-		this.game = game;
 	}
 	
 	public void setHomeActivity(Activity activity)
@@ -120,9 +105,9 @@ public class QuizActivity extends ActionBarActivity {
 
 	public void displayNextQuestion()
 	{
-		this.question = this.game.getQuestion();
+		this.question = Game.getInstance().getQuestion();
 		displayQuestion(question);
-		showFeedback(game.getSession());
+		showFeedback(Game.getInstance().getSession());
 		errorTextView.setVisibility(View.GONE);
 	}
 	
@@ -146,10 +131,10 @@ public class QuizActivity extends ActionBarActivity {
 	}
 
 	public boolean checkAnswer(Answer answer) {
-		boolean checkAnswer = game.checkAnswer(question, answer);
+		boolean checkAnswer = Game.getInstance().checkAnswer(question, answer);
 		if (checkAnswer) {
-			if (game.isNewRecord()) {
-				int currentRecord = game.getSession().getConsecutiveAttempts();
+			if (Game.getInstance().isNewRecord()) {
+				int currentRecord = Game.getInstance().getSession().getConsecutiveAttempts();
 				saveIntFieldInPreferences(RECORD_PREF_KEY, currentRecord);
 				showTextToClipboardNotification("Congratulations, you set a new record: "
 						+ currentRecord);
@@ -158,7 +143,7 @@ public class QuizActivity extends ActionBarActivity {
 		} else {
 			errorTextView.setVisibility(View.VISIBLE);
 		}
-		showFeedback(this.game.getSession());
+		showFeedback(Game.getInstance().getSession());
 		return checkAnswer;
 	}
 
@@ -169,80 +154,47 @@ public class QuizActivity extends ActionBarActivity {
 				+ session.getTotalAttempts().toString());
 		consecutiveResultTextView.setText("consecutive: "
 				+ session.getConsecutiveAttempts().toString());
-		recordTextView.setText("record: " + this.game.getRecord());
+		recordTextView.setText("record: " + Game.getInstance().getRecord());
 	}
 
 	public void reset() {
 		saveIntFieldInPreferences(RECORD_PREF_KEY, 0);
 		Session newSession = new Session();
-		game.setRecord(0);
-		game.setSession(newSession);
+		Game.getInstance().setRecord(0);
+		Game.getInstance().setSession(newSession);
 		displayNextQuestion();
 	}
 
 	public void initGame() {
-		List<Question> questions = new Vector<Question>();
-		List<Answer> answers1 = new Vector<Answer>();
-		List<Answer> answers2 = new Vector<Answer>();
-		List<Answer> answers3 = new Vector<Answer>();
-		List<Answer> answers4 = new Vector<Answer>();
-
-		Answer answer1false = new Answer("answer 1", false);
-		Answer answer2false = new Answer("answer 2", false);
-		Answer answer3false = new Answer("answer 3", false);
-		Answer answer4false = new Answer("answer 4", false);
-		Answer answer1true = new Answer("answer 1", true);
-		Answer answer2true = new Answer("answer 2", true);
-		Answer answer3true = new Answer("answer 3", true);
-		Answer answer4true = new Answer("answer 4", true);
-
-		answers1.add(answer1true);
-		answers1.add(answer2false);
-		answers1.add(answer3false);
-
-		answers2.add(answer1false);
-		answers2.add(answer2true);
-		answers2.add(answer3false);
-		answers2.add(answer4false);
-
-		answers3.add(answer1false);
-		answers3.add(answer2true);
-		answers3.add(answer3true);
-
-		answers4.add(answer1false);
-		answers4.add(answer2true);
-		answers4.add(answer3false);
-		answers4.add(answer4true);
-
-		Question question1 = new Question("question 1", answers1);
-		Question question2 = new Question("question 2", answers2);
-		Question question3 = new Question("question 3", answers3);
-		Question question4 = new Question("question 4", answers4);
-
-		questions.add(question1);
-		questions.add(question2);
-		questions.add(question3);
-		questions.add(question4);
-
 		Integer record = getIntFieldInPreferences(RECORD_PREF_KEY);
-		this.game = new Game(questions, record);
+		Game.getInstance().setRecord(record);
 		loadSession();
+		loadSettings();
 	}
 	
 	protected void loadSession()
 	{
 		String serializedSession = getStringFieldInPreferences(SESSION_PREF_KEY);
-		this.game.setSession(new Session(serializedSession));
+		Game.getInstance().setSession(new Session(serializedSession));
 	}
+	
+	protected void loadSettings()
+	{
+		String serializedSettings = getStringFieldInPreferences(SETTINGS_PREF_KEY);
+		Game.getInstance().setSettings(new Settings(serializedSettings));
+	}
+	
+	
 
 	protected Integer getIntFieldInPreferences(String fieldName) {
-
+		String settingPrefixName = getApplicationContext().getPackageName();
 		SharedPreferences settings = getSharedPreferences(settingPrefixName, 0);
 		int field = settings.getInt(fieldName, 0);
 		return field;
 	}
 
 	protected String getStringFieldInPreferences(String fieldName) {
+		String settingPrefixName = getApplicationContext().getPackageName();
 		SharedPreferences settings = getSharedPreferences(settingPrefixName, 0);
 		String field = settings.getString(fieldName, "");
 		return field;
@@ -250,6 +202,7 @@ public class QuizActivity extends ActionBarActivity {
 
 	protected void saveIntFieldInPreferences(String fieldName, Integer n) {
 
+		String settingPrefixName = getApplicationContext().getPackageName();
 		SharedPreferences settings = getSharedPreferences(settingPrefixName, 0);
 		SharedPreferences.Editor editor = settings.edit();
 		editor.putInt(fieldName, n);
@@ -260,6 +213,7 @@ public class QuizActivity extends ActionBarActivity {
 
 	protected void saveStringFieldInPreferences(String fieldName, String value) {
 
+		String settingPrefixName = getApplicationContext().getPackageName();
 		SharedPreferences settings = getSharedPreferences(settingPrefixName, 0);
 		SharedPreferences.Editor editor = settings.edit();
 		editor.putString(fieldName, value);
@@ -303,25 +257,9 @@ public class QuizActivity extends ActionBarActivity {
 		else if (itemId == R.id.menu_reset) {
 			reset();
 		}
-		
-		else if (itemId == R.id.menu_refresh) {
-			Toast.makeText(this, "Fake refreshing...", Toast.LENGTH_SHORT)
-					.show();
-			getActionBarHelper().setRefreshActionItemState(true);
-			getWindow().getDecorView().postDelayed(new Runnable() {
-				@Override
-				public void run() {
-					getActionBarHelper().setRefreshActionItemState(false);
-				}
-			}, 1000);
-		} else if (itemId == R.id.menu_search) {
-			Toast.makeText(this, "Tapped search", Toast.LENGTH_SHORT).show();
-		} else if (itemId == R.id.menu_share) {
-			Toast.makeText(this, "Tapped share", Toast.LENGTH_SHORT).show();
-		} else if (itemId == R.id.menu_menu) {
-			this.openOptionsMenu();
-		} 
-
+		else if (itemId == R.id.menu_settings) {
+			// do nothing, app caller should do something
+		}
 		return super.onOptionsItemSelected(item);
 	}
 
