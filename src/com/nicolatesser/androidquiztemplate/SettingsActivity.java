@@ -69,15 +69,14 @@ public class SettingsActivity extends ActionBarActivity {
 				Settings settings = Game.getInstance().getSettings();
 				String categoy = checkBoxifiedTextView.getText();
 				List<String> selectedSettings = settings.getSelectedSettings();
-				List<String> newSelectedSettings = new Vector<String>();
 				if (selected) {
 					// add selected category to list
-					newSelectedSettings.add(categoy);
+					selectedSettings.add(categoy);
 				} else {
 					// remove selected category from list
-					//selectedSettings.remove(categoy);
+					selectedSettings.remove(categoy);
 				}
-				settings.setSelectedSettings(newSelectedSettings);
+				settings.setSelectedSettings(selectedSettings);
 				saveStringFieldInPreferences(QuizActivity.SETTINGS_PREF_KEY,
 						settings.toString());
 			}
