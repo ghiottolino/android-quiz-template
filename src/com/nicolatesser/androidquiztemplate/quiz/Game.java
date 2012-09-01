@@ -155,7 +155,28 @@ public class Game {
 			question = getRandomQuestionFromQuestionList(this.recentlyWronglyAnsweredQuestions);
 			recentlyWronglyAnsweredQuestions.remove(question);
 		} else {
-			question = getRandomQuestionFromQuestionList(this.questions);
+			//check if categories are selected
+			List<String> selectedSettings = this.settings.getSelectedSettings();
+			if (selectedSettings.size() == 0) {
+				question = getRandomQuestionFromQuestionList(this.questions);
+			} else {
+				List<Question> pool = new Vector<Question>();
+				for (String selectedCategory : selectedSettings) {
+					List<Question> categoryQuestions = questionsByCategory.get(selectedCategory);
+					if (categoryQuestions!=null)
+					{
+						pool.addAll(categoryQuestions);
+					}
+				}
+				if (pool.size()>0)
+				{
+					question = getRandomQuestionFromQuestionList(pool);
+				}
+				else
+				{
+					question = getRandomQuestionFromQuestionList(this.questions);
+				}
+			}			
 		}
 		return question;
 	}
