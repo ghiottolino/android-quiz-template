@@ -254,10 +254,10 @@ public class QuizActivity extends ActionBarActivity {
 			goToMarket = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pub:\"Nicola Tesser\"")); 
 			startActivity(goToMarket); 
 		}
-		else if (itemId == R.id.menu_menu) {
+		else if (itemId == R.id.menu_reset) {
 			reset();
 		}
-		else if (itemId == R.id.menu_settings) {
+		else if (itemId == R.id.menu_menu) {
 			this.openOptionsMenu();
 		}
 		return super.onOptionsItemSelected(item);

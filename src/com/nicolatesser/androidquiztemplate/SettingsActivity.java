@@ -23,6 +23,7 @@ import com.nicolatesser.androidquiztemplate.checkboxlist.CheckBoxifiedText;
 import com.nicolatesser.androidquiztemplate.checkboxlist.CheckBoxifiedTextListAdapter;
 import com.nicolatesser.androidquiztemplate.checkboxlist.CheckBoxifiedTextView;
 import com.nicolatesser.androidquiztemplate.quiz.Game;
+import com.nicolatesser.androidquiztemplate.quiz.Session;
 
 import com.nicolatesser.androidquiztemplate.quiz.Settings;
 
@@ -111,7 +112,16 @@ public class SettingsActivity extends ActionBarActivity {
 		// Commit the edits!
 		boolean commit = editor.commit();
 	}
+	protected void saveIntFieldInPreferences(String fieldName, Integer n) {
 
+		String settingPrefixName = getApplicationContext().getPackageName();
+		SharedPreferences settings = getSharedPreferences(settingPrefixName, 0);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putInt(fieldName, n);
+
+		// Commit the edits!
+		boolean commit = editor.commit();
+	}
 	// MENU
 
 	@Override
@@ -122,6 +132,13 @@ public class SettingsActivity extends ActionBarActivity {
 		// that the
 		// action bar helpers have a chance to handle this event.
 		return super.onCreateOptionsMenu(menu);
+	}
+	
+	public void reset() {
+		saveIntFieldInPreferences(QuizActivity.RECORD_PREF_KEY, 0);
+		Session newSession = new Session();
+		Game.getInstance().setRecord(0);
+		Game.getInstance().setSession(newSession);
 	}
 
 	@Override
@@ -137,7 +154,10 @@ public class SettingsActivity extends ActionBarActivity {
 			goToMarket = new Intent(Intent.ACTION_VIEW,
 					Uri.parse("market://search?q=pub:\"Nicola Tesser\""));
 			startActivity(goToMarket);
-		} else if (itemId == R.id.menu_menu) {
+			
+		} else if (itemId == R.id.menu_reset) {
+			reset();
+		}else if (itemId == R.id.menu_menu) {
 			this.openOptionsMenu();
 		}
 
