@@ -28,6 +28,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageButton;
@@ -78,9 +79,13 @@ public class ActionBarHelperBase extends ActionBarHelper {
         }
         
         // display an icon on Android < Honey Comb for diplay a button in the action bar for opening the non action menu
-        MenuItem item = new SimpleMenuItem(menu, R.id.menu_menu, 4, "Menu");
-        item.setIcon(R.drawable.ic_action_menu);
-        addActionItemCompatFromMenuItem(item);
+        //if (ViewConfiguration.get(mActivity).hasPermanentMenuKey())
+        //{
+            MenuItem item = new SimpleMenuItem(menu, R.id.menu_menu, 4, "Menu");
+            item.setIcon(R.drawable.ic_action_menu);
+            addActionItemCompatFromMenuItem(item);
+        //}
+    
     }
 
     /**

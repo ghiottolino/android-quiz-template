@@ -23,7 +23,7 @@
         android:orderInCategory="1"
         android:showAsAction="always"
         android:title="@string/menu_settings"
-        android:visible="false"/>
+        android:visible="true"/>
     <item
         android:id="@+id/menu_refresh"
         android:icon="@drawable/ic_action_refresh"

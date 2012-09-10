@@ -25,6 +25,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewConfiguration;
 
 /**
  * An extension of {@link ActionBarHelper} that provides Android 3.0-specific functionality for
@@ -42,6 +43,16 @@ public class ActionBarHelperHoneycomb extends ActionBarHelper {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         mOptionsMenu = menu;
+        //set home button enabled as default (4.0 has default false)
+        mActivity.getActionBar().setHomeButtonEnabled(true);
+        //android >= 3 does not show menu button on the action bar if device has a phisical menu button. this workaround shows it anyway.
+        if (ViewConfiguration.get(mActivity).hasPermanentMenuKey())
+        {
+        	 final MenuItem menuItem = mOptionsMenu.findItem(R.id.menu_menu);
+        	 menuItem.setVisible(true);
+        	 menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        }
+        	
         return super.onCreateOptionsMenu(menu);
     }
 
