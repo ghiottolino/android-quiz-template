@@ -33,8 +33,8 @@ import android.view.ViewConfiguration;
  */
 @SuppressLint("NewApi")
 public class ActionBarHelperHoneycomb extends ActionBarHelper {
-    private Menu mOptionsMenu;
-    private View mRefreshIndeterminateProgressView = null;
+    protected Menu mOptionsMenu;
+    protected View mRefreshIndeterminateProgressView = null;
 
     protected ActionBarHelperHoneycomb(Activity activity) {
         super(activity);
@@ -43,15 +43,7 @@ public class ActionBarHelperHoneycomb extends ActionBarHelper {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         mOptionsMenu = menu;
-        //set home button enabled as default (4.0 has default false)
-        mActivity.getActionBar().setHomeButtonEnabled(true);
-        //android >= 3 does not show menu button on the action bar if device has a phisical menu button. this workaround shows it anyway.
-        if (ViewConfiguration.get(mActivity).hasPermanentMenuKey())
-        {
-        	 final MenuItem menuItem = mOptionsMenu.findItem(R.id.menu_menu);
-        	 menuItem.setVisible(true);
-        	 menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        }
+
         	
         return super.onCreateOptionsMenu(menu);
     }
