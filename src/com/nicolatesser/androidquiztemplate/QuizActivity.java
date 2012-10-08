@@ -69,6 +69,8 @@ public class QuizActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.quiz);
 
+		// TODO : make a reset intent
+		
 		questionTextView = (TextView) findViewById(R.id.question);
 		totalResultTextView = (TextView) findViewById(R.id.totalResult);
 		consecutiveResultTextView = (TextView) findViewById(R.id.consecutiveResult);
@@ -245,6 +247,8 @@ public class QuizActivity extends ActionBarActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
 
+		// TODO : menu in a helper class
+		
 		if (itemId == android.R.id.home) {
 			// do nothing
 		} 

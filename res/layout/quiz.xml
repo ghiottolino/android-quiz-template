@@ -7,15 +7,35 @@
 
     <!-- question -->
 
-    <TextView
-        android:id="@+id/question"
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/question_layout"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="2"
         android:gravity="center"
-        android:text="@string/hello"
-        android:textSize="@dimen/question_size" >
-    </TextView>
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/question"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="@string/hello"
+            android:textSize="@dimen/question_size" >
+        </TextView>
+
+        <Button
+            android:id="@+id/question_option"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:visibility="gone"
+            android:text=""
+            android:textSize="@dimen/button_size" >
+        </Button>
+    </LinearLayout>
 
     <ListView
         android:id="@+id/list"
@@ -75,7 +95,7 @@
             android:textStyle="bold" >
         </TextView>
     </LinearLayout>
-    
+
     <!-- TODO: do a landscape template -->
 
 </LinearLayout>

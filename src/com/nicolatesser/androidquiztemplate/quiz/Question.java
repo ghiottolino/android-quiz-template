@@ -39,6 +39,7 @@ public class Question {
 	private boolean markedForReview = false;
 	private Integer questionId;
 	private final String questionText;
+	private Map<String,String> questionAttributes = new HashMap<String, String>();
 
 	/**
 	 * @param categoryId
@@ -214,5 +215,14 @@ public class Question {
 		this.categories = categories;
 	}
 
+	public Map<String, String> getQuestionAttributes() {
+		return questionAttributes;
+	}
+
+	public void setQuestionAttributes(Map<String, String> questionAttributes) {
+		this.questionAttributes = questionAttributes;
+	}
+
+	
 	
 }

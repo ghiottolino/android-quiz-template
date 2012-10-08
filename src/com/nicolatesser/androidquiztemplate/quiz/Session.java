@@ -53,7 +53,7 @@ public class Session implements Serializable {
 
 	public String toString() {
 		String serializedSession = totalAttempts + ";" + correctAttempts + ";"
-				+ correctAttempts;
+				+ consecutiveAttempts;
 		return serializedSession;
 	}
 
