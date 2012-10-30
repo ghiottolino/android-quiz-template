@@ -96,6 +96,21 @@ public class SettingsActivity extends ActionBarActivity {
 
 			adapter.addItem(new CheckBoxifiedText(category, category, selected));
 		}
+		
+		// Clean up selected settings (if old categories are being removed from a version to the next one)
+		List<String> selectedSettingsToDelete = new Vector<String>();
+		for (String selectedSetting : selectedSettings )
+		{
+			if (!categories.contains(selectedSetting))
+			{
+				selectedSettingsToDelete.add(selectedSetting);
+			}
+		}
+		for (String selectedSettingToDelete : selectedSettingsToDelete)
+		{
+			game.getSettings().getSelectedSettings().remove(selectedSettingToDelete);
+		}
+		
 
 		// Display it
 		mListView.setAdapter(adapter);

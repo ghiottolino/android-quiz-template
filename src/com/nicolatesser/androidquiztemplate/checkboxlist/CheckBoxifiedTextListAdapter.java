@@ -86,16 +86,16 @@ public class CheckBoxifiedTextListAdapter extends BaseAdapter {
       * @returns a CheckBoxifiedTextView that holds wraps around an CheckBoxifiedText */
      public View getView(int position, View convertView, ViewGroup parent){
           CheckBoxifiedTextView btv;
-          if (convertView == null) {
+    //      if (convertView == null) {
                btv = new CheckBoxifiedTextView(mContext, mItems.get(position), checkBoxHandler);
-          } else { // Reuse/Overwrite the View passed
-               // We are assuming(!) that it is castable!
-        	   CheckBoxifiedText src = mItems.get(position);
-               btv = (CheckBoxifiedTextView) convertView;
-               btv.setCheckBoxState(src.getChecked()); 
-               btv = (CheckBoxifiedTextView) convertView;
-               btv.setText(mItems.get(position).getText());
-          }
+//          } else { // Reuse/Overwrite the View passed
+//               // We are assuming(!) that it is castable!
+//        	   CheckBoxifiedText src = mItems.get(position);
+//               btv = (CheckBoxifiedTextView) convertView;
+//               btv.setCheckBoxState(src.getChecked()); 
+//               btv = (CheckBoxifiedTextView) convertView;
+//               btv.setText(mItems.get(position).getText());
+//          }
           return btv;
      }
 }
