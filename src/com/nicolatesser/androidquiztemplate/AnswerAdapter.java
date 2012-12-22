@@ -1,6 +1,7 @@
 package com.nicolatesser.androidquiztemplate;
 
 
+import java.util.Collections;
 import java.util.List;
 
 import com.nicolatesser.androidquiztemplate.quiz.Answer;
@@ -22,7 +23,7 @@ public class AnswerAdapter extends ArrayAdapter<Answer>{
     OnClickListener listener = null;
    
     public AnswerAdapter(Context context, int layoutResourceId, List<Answer> data, OnClickListener listener) {
-        super(context, layoutResourceId, data);
+    	super(context, layoutResourceId, data);
         this.layoutResourceId = layoutResourceId;
         this.context = context;
         this.data = data;

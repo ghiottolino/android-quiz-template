@@ -15,6 +15,7 @@
  */
 package com.nicolatesser.androidquiztemplate;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 
@@ -127,7 +128,10 @@ public class QuizActivity extends ActionBarActivity {
 
 			}
 		};
-		adapter = new AnswerAdapter(this, R.id.answer, question.getAnswers(),
+		//unsort answers
+		List<Answer> answers = question.getAnswers();
+		Collections.shuffle(answers);
+		adapter = new AnswerAdapter(this, R.id.answer, answers,
 				listener);
 		mListView.setAdapter(adapter);
 	}
