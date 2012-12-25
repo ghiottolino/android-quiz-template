@@ -35,6 +35,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.opengl.Visibility;
 import android.os.Bundle;
+import android.os.Handler;
 
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -128,13 +129,19 @@ public class QuizActivity extends ActionBarActivity {
 		OnClickListener listener = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Button button = (Button) v;
+				final Button button = (Button) v;
 				if (!question.hasMultipleCorrectAnswers())
 				{
 					Answer answer = new Answer(button.getText().toString(), true);
 					boolean checkAnswer = checkAnswers(Arrays.asList(answer));
 					if (!checkAnswer) {
 						button.setEnabled(false);
+						Handler handler = new Handler();
+						handler.postDelayed(new Runnable() {
+							public void run() {
+								button.setSelected(true);
+							}
+						}, 1000);
 					}
 				}
 				
@@ -142,30 +149,29 @@ public class QuizActivity extends ActionBarActivity {
 				{
 					if (button.isSelected())
 					{
-						button.setSelected(false);
-						//button.setBackgroundDrawable(R.drawable.btn_default_normal);
-						
+						button.setSelected(false);	
 					}
 					else
 					{
 						button.setSelected(true);
-						//button.setBackgroundResource(R.drawable.btn_default_normal_disable);
 					}
 									
 					ListView listView = (ListView)v.getParent().getParent();
 					int childCount = listView.getChildCount();
 					List<Answer> answers = new Vector<Answer>();
+					List<Button> answersButtons = new Vector<Button>();
 					for (int i=0;i<childCount;i++)
 					{
 						View linearLayoutView = listView.getChildAt(i);
 						LinearLayout linearLayout = (LinearLayout) linearLayoutView;
 						
-						button = (Button)linearLayout.getChildAt(0);
+						Button otherButton = (Button)linearLayout.getChildAt(0);
 						
-						if (button.isSelected())
+						if (otherButton.isSelected())
 						{
-							Answer answer = new Answer(button.getText().toString(), true);					
+							Answer answer = new Answer(otherButton.getText().toString(), true);					
 							answers.add(answer);
+							answersButtons.add(otherButton);
 						}
 					}
 					if (question.getNumberOfCorrectAnswers()==answers.size())
@@ -173,14 +179,27 @@ public class QuizActivity extends ActionBarActivity {
 						boolean checkAnswer = checkAnswers(answers);
 						if (!checkAnswer)
 						{
-							for (int i=0;i<childCount;i++)
+							for (final Button answerButton : answersButtons)
 							{
-								View linearLayoutView = listView.getChildAt(i);
-								LinearLayout linearLayout = (LinearLayout) linearLayoutView;
-								button = (Button)linearLayout.getChildAt(0);
-								button.setSelected(false);
-							//	button.setBackgroundResource(R.drawable.btn_default_normal);
+								answerButton.setEnabled(false);
+								answerButton.setSelected(false);
+								
+								Handler handler = new Handler();
+								handler.postDelayed(new Runnable() {
+									public void run() {
+										answerButton.setEnabled(true);
+									}
+								}, 1000);
 							}
+							
+//							
+//							for (int i=0;i<childCount;i++)
+//							{
+//								View linearLayoutView = listView.getChildAt(i);
+//								LinearLayout linearLayout = (LinearLayout) linearLayoutView;
+//								Button otherButton = (Button)linearLayout.getChildAt(0);
+//								otherButton.setSelected(false);
+//							}
 						}
 					}
 				}

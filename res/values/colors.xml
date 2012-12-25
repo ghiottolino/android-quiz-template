@@ -16,4 +16,5 @@
 
 <resources>
     <color name="actionbar_title_color">#224894</color>
+    <color name="button_error">#E62525</color>
 </resources>
