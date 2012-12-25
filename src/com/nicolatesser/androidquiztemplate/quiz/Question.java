@@ -222,6 +222,31 @@ public class Question {
 	public void setQuestionAttributes(Map<String, String> questionAttributes) {
 		this.questionAttributes = questionAttributes;
 	}
+	
+	public boolean hasMultipleCorrectAnswers()
+	{
+		if (getNumberOfCorrectAnswers()>1)
+		{
+			return true;
+		}
+		else 
+		{
+			return false;
+		}
+	}
+	
+	public int getNumberOfCorrectAnswers()
+	{
+		int numberOfCorrectAnswers=0;
+		for (Answer answer: answers)
+		{
+			if (answer.isAnswerCorrect())
+			{
+				numberOfCorrectAnswers++;
+			}
+		}
+		return numberOfCorrectAnswers;
+	}
 
 	
 	

@@ -15,6 +15,7 @@
  */
 package com.nicolatesser.androidquiztemplate;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
@@ -41,6 +42,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -115,17 +117,75 @@ public class QuizActivity extends ActionBarActivity {
 	}
 	
 	public void displayQuestion(final Question question) {
-		questionTextView.setText(question.getQuestionText());
+		
+		String questionText=question.getQuestionText();
+		if (question.hasMultipleCorrectAnswers())
+		{
+			questionText+= "("+question.getNumberOfCorrectAnswers()+")";
+		}
+		
+		questionTextView.setText(questionText);
 		OnClickListener listener = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				Button button = (Button) v;
-				Answer answer = new Answer(button.getText().toString(), true);
-				boolean checkAnswer = checkAnswer(answer);
-				if (!checkAnswer) {
-					button.setEnabled(false);
+				if (!question.hasMultipleCorrectAnswers())
+				{
+					Answer answer = new Answer(button.getText().toString(), true);
+					boolean checkAnswer = checkAnswers(Arrays.asList(answer));
+					if (!checkAnswer) {
+						button.setEnabled(false);
+					}
 				}
-
+				
+				else
+				{
+					if (button.isSelected())
+					{
+						button.setSelected(false);
+						//button.setBackgroundDrawable(R.drawable.btn_default_normal);
+						
+					}
+					else
+					{
+						button.setSelected(true);
+						//button.setBackgroundResource(R.drawable.btn_default_normal_disable);
+					}
+									
+					ListView listView = (ListView)v.getParent().getParent();
+					int childCount = listView.getChildCount();
+					List<Answer> answers = new Vector<Answer>();
+					for (int i=0;i<childCount;i++)
+					{
+						View linearLayoutView = listView.getChildAt(i);
+						LinearLayout linearLayout = (LinearLayout) linearLayoutView;
+						
+						button = (Button)linearLayout.getChildAt(0);
+						
+						if (button.isSelected())
+						{
+							Answer answer = new Answer(button.getText().toString(), true);					
+							answers.add(answer);
+						}
+					}
+					if (question.getNumberOfCorrectAnswers()==answers.size())
+					{
+						boolean checkAnswer = checkAnswers(answers);
+						if (!checkAnswer)
+						{
+							for (int i=0;i<childCount;i++)
+							{
+								View linearLayoutView = listView.getChildAt(i);
+								LinearLayout linearLayout = (LinearLayout) linearLayoutView;
+								button = (Button)linearLayout.getChildAt(0);
+								button.setSelected(false);
+							//	button.setBackgroundResource(R.drawable.btn_default_normal);
+							}
+						}
+					}
+				}
+				
+				
 			}
 		};
 		//unsort answers
@@ -136,8 +196,8 @@ public class QuizActivity extends ActionBarActivity {
 		mListView.setAdapter(adapter);
 	}
 
-	public boolean checkAnswer(Answer answer) {
-		boolean checkAnswer = Game.getInstance().checkAnswer(question, answer);
+	public boolean checkAnswers(List<Answer> answers) {
+		boolean checkAnswer = Game.getInstance().checkAnswers(question, answers);
 		if (checkAnswer) {
 			if (Game.getInstance().isNewRecord()) {
 				int currentRecord = Game.getInstance().getSession().getConsecutiveAttempts();

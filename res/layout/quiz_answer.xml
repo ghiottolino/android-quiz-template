@@ -10,7 +10,9 @@
         android:layout_height="fill_parent"
         android:layout_weight="1"
         android:text="@string/hello"
-        android:textSize="@dimen/button_size">
+        android:textSize="@dimen/button_size"
+        android:background="@drawable/buttons"
+        android:layout_margin="3dp">
     </Button>
 
 </LinearLayout>

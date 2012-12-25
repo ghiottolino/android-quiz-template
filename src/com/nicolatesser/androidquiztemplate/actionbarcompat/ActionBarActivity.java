@@ -81,4 +81,6 @@ public abstract class ActionBarActivity extends FragmentActivity {
         mActionBarHelper.onTitleChanged(title, color);
         super.onTitleChanged(title, color);
     }
+    
+    
 }

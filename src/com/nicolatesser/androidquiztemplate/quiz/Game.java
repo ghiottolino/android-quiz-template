@@ -243,6 +243,28 @@ public class Game {
 		}
 		return correct;
 	}
+	
+	public boolean checkAnswers(Question question, List<Answer> answers) {
+
+		boolean correct = question.getAnswers().containsAll(answers);
+		this.session.setTotalAttempts(this.session.getTotalAttempts() + 1);
+
+		if (correct) {
+			this.session
+					.setCorrectAttempts(this.session.getCorrectAttempts() + 1);
+			this.session.setConsecutiveAttempts(this.session
+					.getConsecutiveAttempts() + 1);
+		} else {
+			this.session.setConsecutiveAttempts(0);
+			if (!recentlyWronglyAnsweredQuestions.contains(question)) {
+				recentlyWronglyAnsweredQuestions.add(question);
+			}
+		}
+		return correct;
+	}
+	
+	
+	
 
 	public boolean isNewRecord() {
 		if (session.getConsecutiveAttempts() > this.record) {

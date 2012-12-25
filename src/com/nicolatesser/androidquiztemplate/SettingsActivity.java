@@ -1,6 +1,7 @@
 package com.nicolatesser.androidquiztemplate;
 
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 
@@ -86,6 +87,7 @@ public class SettingsActivity extends ActionBarActivity {
 		adapter = new CheckBoxifiedTextListAdapter(this, checkBoxHandler);
 		Game game = Game.getInstance();
 		List<String> categories = game.getCategories();
+		Collections.sort(categories);
 		List<String> selectedSettings = game.getSettings()
 				.getSelectedSettings();
 		for (String category : categories) {
