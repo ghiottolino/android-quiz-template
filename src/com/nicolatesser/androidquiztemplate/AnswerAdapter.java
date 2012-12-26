@@ -42,7 +42,10 @@ public class AnswerAdapter extends ArrayAdapter<Answer>{
 
         //fix the height
         int height = parent.getHeight();    
-        int targetHeight = ((int) Math.floor(height/(data.size())))-12;
+        int proportionalHeight = ((int) Math.floor(height/(data.size())))-12;
+        int minButtonHeight = (int)getContext().getResources().getDimension(R.dimen.button_size)+12;
+        int targetHeight = Math.max(proportionalHeight, minButtonHeight);
+        
         button.setHeight(targetHeight);
         button.setOnClickListener(listener);
         return v;
