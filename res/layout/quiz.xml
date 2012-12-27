@@ -20,21 +20,29 @@
             android:id="@+id/question"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:gravity="center"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="@string/hello"
             android:textSize="@dimen/question_size" >
         </TextView>
-
-        <Button
+<!-- 
+        <ImageView
             android:id="@+id/question_option"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="5"
-            android:visibility="gone"
-            android:text=""
-            android:textSize="@dimen/button_size" >
-        </Button>
+            android:src="@drawable/ic_english"
+            android:visibility="visible" >
+        </ImageView> -->
+        
+         
+    <ImageView
+        android:id="@+id/question_option"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_english" />
+        
+        
     </LinearLayout>
 
     <ListView

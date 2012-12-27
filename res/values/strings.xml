@@ -28,4 +28,6 @@
     <string name="menu_menu">Menu</string>
     <string name="menu_reset">Reset</string>
     <string name="menu_other_apps">More Apps</string>
+    <string name="menu_buy">Buy</string>
+    
 </resources>

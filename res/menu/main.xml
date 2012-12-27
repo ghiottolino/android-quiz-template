@@ -53,6 +53,13 @@
         android:showAsAction="never"
         android:title="@string/menu_other_apps"/>
     <item
+        android:id="@+id/menu_buy"
+        android:icon="@drawable/ic_menu_other_apps"
+        android:orderInCategory="1"
+        android:showAsAction="never"
+        android:title="@string/menu_buy"/>
+    
+    <item
         android:id="@+id/menu_share"
         android:icon="@drawable/ic_menu_share"
         android:orderInCategory="1"

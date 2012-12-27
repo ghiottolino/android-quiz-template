@@ -43,6 +43,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -65,7 +66,8 @@ public class QuizActivity extends ActionBarActivity {
 	private TextView recordTextView;
 	private ListView mListView;
 	private ListAdapter adapter;
-	private Question question;
+	protected Question question;
+	protected ImageView questionOptionButton;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -82,7 +84,8 @@ public class QuizActivity extends ActionBarActivity {
 		errorTextView = (TextView) findViewById(R.id.error);
 		errorTextView.setVisibility(View.GONE);
 		mListView = (ListView) findViewById(R.id.list);
-
+		questionOptionButton = (ImageView) findViewById(R.id.question_option);
+		
 		// TODO : load session
 		initGame();
 		displayNextQuestion();
