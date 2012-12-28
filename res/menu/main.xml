@@ -58,7 +58,7 @@
         android:orderInCategory="1"
         android:showAsAction="never"
         android:title="@string/menu_buy"/>
-    
+
     <item
         android:id="@+id/menu_share"
         android:icon="@drawable/ic_menu_share"

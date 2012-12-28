@@ -21,7 +21,7 @@ limitations under the License.
     android:versionName="1.0"
     android:installLocation="preferExternal" >
 
-    <uses-sdk android:minSdkVersion="4" android:targetSdkVersion="15" />
+    <uses-sdk android:minSdkVersion="5" android:targetSdkVersion="15" />
 
     
     <application
