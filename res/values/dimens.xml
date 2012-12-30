@@ -18,7 +18,9 @@
     <dimen name="actionbar_compat_height">48dp</dimen>
     <dimen name="actionbar_compat_button_width">48dp</dimen>
     <dimen name="actionbar_compat_button_home_width">56dp</dimen>
-    <dimen name="question_size">35dp</dimen>
+    <dimen name="question_size">30dp</dimen>
     <dimen name="button_size">20dp</dimen>
     <dimen name="feedback_size">15dp</dimen> 
+    <dimen name="connecting_store_size">20dp</dimen>
+    
 </resources>
