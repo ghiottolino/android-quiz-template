@@ -44,14 +44,13 @@ int id error 0x7f060010
 int id fragment_container 0x7f060007
 int id headlines_fragment 0x7f060008
 int id list 0x7f06000e
-int id menu_buy 0x7f060019
-int id menu_menu 0x7f06001c
-int id menu_other_apps 0x7f06001a
+int id menu_menu 0x7f06001b
+int id menu_other_apps 0x7f060019
 int id menu_refresh 0x7f060004
 int id menu_reset 0x7f060018
 int id menu_search 0x7f060017
 int id menu_settings 0x7f060016
-int id menu_share 0x7f06001b
+int id menu_share 0x7f06001a
 int id question 0x7f06000c
 int id question_layout 0x7f06000b
 int id question_option 0x7f06000d

@@ -46,12 +46,7 @@
         android:orderInCategory="1"
         android:showAsAction="never"
         android:title="@string/menu_reset"/>
-    <item
-        android:id="@+id/menu_buy"
-        android:icon="@drawable/ic_menu_buy"
-        android:orderInCategory="1"
-        android:showAsAction="never"
-        android:title="@string/menu_buy"/>
+
     <item
         android:id="@+id/menu_other_apps"
         android:icon="@drawable/ic_menu_other_apps"
