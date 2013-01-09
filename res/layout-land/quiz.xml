@@ -13,7 +13,7 @@
         android:id="@+id/question_layout"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
-        android:layout_weight="2"
+        android:layout_weight="3"
         android:gravity="center|center_horizontal"
         android:orientation="horizontal" >
 
@@ -51,7 +51,7 @@
         android:id="@+id/quiz_feedback_layout"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_weight="2"
+        android:layout_weight="3"
         android:gravity="center"
         android:orientation="vertical" >
 
@@ -59,42 +59,53 @@
             android:id="@+id/error"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
+            android:gravity="center_horizontal|bottom"
             android:text="@string/error_message"
             android:textColor="#cc0000"
             android:textSize="@dimen/feedback_size"
             android:textStyle="bold" >
         </TextView>
+        
+        <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:orientation="horizontal" >
 
-        <TextView
-            android:id="@+id/totalResult"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@string/hello"
-            android:textSize="@dimen/feedback_size"
-            android:textStyle="bold" >
-        </TextView>
-
-        <TextView
-            android:id="@+id/consecutiveResult"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@string/hello"
-            android:textSize="@dimen/feedback_size"
-            android:textStyle="bold" >
-        </TextView>
-
-        <TextView
-            android:id="@+id/record"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@string/hello"
-            android:textSize="@dimen/feedback_size"
-            android:textStyle="bold" >
-        </TextView>
+	        <TextView
+	            android:id="@+id/totalResult"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:gravity="center_horizontal|bottom"
+	            android:layout_weight="1"
+	            android:text="@string/hello"
+	            android:textSize="@dimen/feedback_size"
+	            android:textStyle="bold" >
+	        </TextView>
+	
+	        <TextView
+	            android:id="@+id/consecutiveResult"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:gravity="center_horizontal|bottom"
+	            android:layout_weight="1"
+	            android:text="@string/hello"
+	            android:textSize="@dimen/feedback_size"
+	            android:textStyle="bold" >
+	        </TextView>
+	
+	        <TextView
+	            android:id="@+id/record"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:gravity="center_horizontal|bottom"
+	            android:layout_weight="1"
+	            android:text="@string/hello"
+	            android:textSize="@dimen/feedback_size"
+	            android:textStyle="bold" >
+	        </TextView>
+        </LinearLayout>
     </LinearLayout>
 
     <!-- TODO: do a landscape template -->

@@ -15,7 +15,7 @@
   -->
 
 <resources>
-    <dimen name="question_size">20dp</dimen>
-    <dimen name="button_size">15dp</dimen>
-    <dimen name="feedback_size">10dp</dimen> 
+    <dimen name="question_size">16dp</dimen>
+    <dimen name="button_size">12dp</dimen>
+    <dimen name="feedback_size">8dp</dimen> 
 </resources>

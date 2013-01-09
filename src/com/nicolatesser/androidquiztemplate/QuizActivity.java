@@ -117,7 +117,7 @@ public class QuizActivity extends ActionBarActivity {
 		this.question = Game.getInstance().getQuestion();
 		displayQuestion(question);
 		showFeedback(Game.getInstance().getSession());
-		errorTextView.setVisibility(View.GONE);
+		errorTextView.setVisibility(View.INVISIBLE);
 	}
 	
 	public void displayQuestion(final Question question) {
