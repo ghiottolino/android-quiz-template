@@ -46,8 +46,11 @@ public class ActionBarHelperICS extends ActionBarHelperHoneycomb {
 		// has a phisical menu button. this workaround shows it anyway.
 		if (ViewConfiguration.get(mActivity).hasPermanentMenuKey()) {
 			final MenuItem menuItem = mOptionsMenu.findItem(R.id.menu_menu);
-			menuItem.setVisible(true);
-			menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+			if (menuItem!=null)
+			{
+				menuItem.setVisible(true);
+				menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);		
+			}
 		}
 
 		return super.onCreateOptionsMenu(menu);
