@@ -59,8 +59,8 @@ public class QuizActivity extends ActionBarActivity {
 	
 	public static final String SETTINGS_PREF_KEY = "SETTINGS";
 	
-	private TextView questionTextView;
-	private TextView errorTextView;
+	protected TextView questionTextView;
+	protected TextView errorTextView;
 	private TextView totalResultTextView;
 	private TextView consecutiveResultTextView;
 	private TextView recordTextView;
@@ -114,7 +114,7 @@ public class QuizActivity extends ActionBarActivity {
 
 	public void displayNextQuestion()
 	{
-		this.question = Game.getInstance().getQuestion();
+		this.question = Game.getInstance().getQuestion(this.question);
 		displayQuestion(question);
 		showFeedback(Game.getInstance().getSession());
 		errorTextView.setVisibility(View.INVISIBLE);

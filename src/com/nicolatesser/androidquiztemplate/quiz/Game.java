@@ -123,18 +123,21 @@ public class Game {
 	public void initQuestionsByCategory() {
 		for (Question question : this.questions) {
 			List<String> categories = question.getCategories();
-			for (String category : categories) {
-				List<Question> questionByCategoryList = this.questionsByCategory
-						.get(category);
-				if (questionByCategoryList == null) {
-					this.questionsByCategory.put(category,
-							new Vector<Question>());
-					questionByCategoryList = this.questionsByCategory
+			if (categories!=null){
+				for (String category : categories) {
+					List<Question> questionByCategoryList = this.questionsByCategory
 							.get(category);
+					if (questionByCategoryList == null) {
+						this.questionsByCategory.put(category,
+								new Vector<Question>());
+						questionByCategoryList = this.questionsByCategory
+								.get(category);
+					}
+					questionByCategoryList.add(question);
+					this.questionsByCategory.put(category, questionByCategoryList);
 				}
-				questionByCategoryList.add(question);
-				this.questionsByCategory.put(category, questionByCategoryList);
 			}
+			
 		}
 	}
 
@@ -144,6 +147,16 @@ public class Game {
 
 	public void setSession(Session session) {
 		this.session = session;
+	}
+	
+	
+	public Question getQuestion(Question currentQuestion) {
+		if ((currentQuestion!=null)&&(currentQuestion.getNextQuestion()!=null)){
+			return currentQuestion.getNextQuestion();
+		}
+		else{
+			return getQuestion();
+		}
 	}
 
 	public Question getQuestion() {

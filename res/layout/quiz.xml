@@ -9,13 +9,18 @@
     <!-- question -->
 
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/question_layout"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:layout_weight="2"
         android:gravity="center|center_horizontal"
         android:orientation="horizontal" >
+        
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/question"
@@ -47,7 +52,6 @@
         android:gravity="center_horizontal" />
 
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/quiz_feedback_layout"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

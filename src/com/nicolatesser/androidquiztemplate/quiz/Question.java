@@ -40,6 +40,7 @@ public class Question {
 	private Integer questionId;
 	private final String questionText;
 	private Map<String,String> questionAttributes = new HashMap<String, String>();
+	private Question nextQuestion;
 
 	/**
 	 * @param categoryId
@@ -248,6 +249,15 @@ public class Question {
 		return numberOfCorrectAnswers;
 	}
 
+	public Question getNextQuestion() {
+		return nextQuestion;
+	}
+
+	public void setNextQuestion(Question nextQuestion) {
+		this.nextQuestion = nextQuestion;
+	}
+
+	
 	
 	
 }
