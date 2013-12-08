@@ -1,6 +1,6 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Original file: /home/tex/workspaces/android/android-quiz-template/src/com/android/vending/billing/IInAppBillingService.aidl
+ * Original file: /home/tex/git/android-quiz-template/src/com/android/vending/billing/IInAppBillingService.aidl
  */
 package com.android.vending.billing;
 /**
