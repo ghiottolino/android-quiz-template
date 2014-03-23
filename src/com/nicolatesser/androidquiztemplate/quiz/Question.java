@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+// TODO : use reflexion to add to a question objects like "TrackInfo" ?
+
 public class Question {
 
 	private List<Answer> answers;
@@ -15,6 +17,10 @@ public class Question {
 	private String questionText;
 	private String imageUri;
 	private Map<String, String> questionAttributes = new HashMap<String, String>();
+	
+	//if for each quesiton there are some follow up, related, sub-questions, use this field.
+	private List<Question> subQuestions;
+	
 
 	public Question(String questionText, List<Answer> answers,
 			List<String> categories) {
@@ -98,5 +104,15 @@ public class Question {
 	public void setQuestionText(String questionText) {
 		this.questionText = questionText;
 	}
+
+	public List<Question> getSubQuestions() {
+		return subQuestions;
+	}
+
+	public void setSubQuestions(List<Question> subQuestions) {
+		this.subQuestions = subQuestions;
+	}
+	
+	
 
 }

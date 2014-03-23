@@ -7,11 +7,10 @@
     <Button
         android:id="@+id/answer"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="0dip"
         android:layout_weight="1"
         android:text="@string/hello"
-        android:textSize="@dimen/button_size"
-        android:background="@drawable/buttons"
+        android:textAppearance="@android:style/TextAppearance.Small"
         android:layout_margin="3dp">
     </Button>
 

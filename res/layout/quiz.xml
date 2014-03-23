@@ -6,13 +6,37 @@
     android:gravity="center_horizontal"
     android:orientation="vertical" >
 
+    <!-- Feedback -->
+    
+    <LinearLayout
+        android:id="@+id/quiz_feedback_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="3"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+
+        <TextView
+            android:id="@+id/feedback"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/hello"
+            android:textAppearance="@android:style/TextAppearance.Small"
+            android:textStyle="bold" >
+        </TextView>
+
+      
+    </LinearLayout>
+    
     <!-- question -->
 
     <LinearLayout
         android:id="@+id/question_layout"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
-        android:layout_weight="2"
+        android:layout_weight="3"
         android:gravity="center|center_horizontal"
         android:orientation="horizontal" >
         
@@ -24,22 +48,14 @@
 
         <TextView
             android:id="@+id/question"
-            android:layout_width="wrap_content"
+            android:layout_width="0dip"
             android:layout_height="fill_parent"
             android:layout_weight="1"
+            android:textAppearance="@android:style/TextAppearance.Large"
             android:gravity="center"
-            android:text="@string/hello"
-            android:textSize="@dimen/question_size" >
+            android:text="@string/hello" >
         </TextView>
 
-        <ImageView
-            android:id="@+id/question_option"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_english"
-            android:visibility="gone"
-            android:paddingLeft="10dp"
-            android:gravity="center" />
 
     </LinearLayout>
 
@@ -51,55 +67,7 @@
         android:focusable="true"
         android:gravity="center_horizontal" />
 
-    <LinearLayout
-        android:id="@+id/quiz_feedback_layout"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="2"
-        android:gravity="center"
-        android:orientation="vertical" >
-
-        <TextView
-            android:id="@+id/error"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@string/error_message"
-            android:textColor="#cc0000"
-            android:textSize="@dimen/feedback_size"
-            android:textStyle="bold" >
-        </TextView>
-
-        <TextView
-            android:id="@+id/totalResult"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@string/hello"
-            android:textSize="@dimen/feedback_size"
-            android:textStyle="bold" >
-        </TextView>
-
-        <TextView
-            android:id="@+id/consecutiveResult"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@string/hello"
-            android:textSize="@dimen/feedback_size"
-            android:textStyle="bold" >
-        </TextView>
-
-        <TextView
-            android:id="@+id/record"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@string/hello"
-            android:textSize="@dimen/feedback_size"
-            android:textStyle="bold" >
-        </TextView>
-    </LinearLayout>
+    
 
     <!-- TODO: do a landscape template -->
 
