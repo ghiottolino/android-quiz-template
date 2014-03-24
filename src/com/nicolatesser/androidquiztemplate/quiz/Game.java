@@ -17,15 +17,11 @@ public class Game {
 
 	private QuestionDatabase questionDatabase;
 
-	private List<Question> questions;
+	protected List<Question> questions;
 
-	private List<Question> answeredQuestions;
+	protected List<Question> answeredQuestions;
 
-	private List<Question> recentlyWronglyAnsweredQuestions;
-	
 	private Question currentQuestion;
-
-	private Random rg = new Random();
 
 	public static Game instance = null;
 
@@ -43,7 +39,6 @@ public class Game {
 	public Game(QuestionDatabase questionDatabase) {
 		this.questions = questionDatabase.getQuestions();
 		this.answeredQuestions = new ArrayList<Question>();
-		this.recentlyWronglyAnsweredQuestions = new ArrayList<Question>();
 	}
 
 	public Session getSession() {
@@ -55,16 +50,22 @@ public class Game {
 	}
 
 	public Question getQuestion() {
-		Question question = getRandomQuestionFromQuestionList(questions);
+
+		List<Question> interserction = new ArrayList<Question>();
+		interserction.addAll(questions);
+		interserction.retainAll(answeredQuestions);
+		Question question = getRandomQuestionFromQuestionList(interserction);
+		this.currentQuestion = question;
 		return question;
 	}
 
 	/**
-	 * Return a random question from the recentlyWronglyAnsweredQuestions list
+	 * Return a random question from the list
 	 * 
 	 * @return
 	 */
-	private Question getRandomQuestionFromQuestionList(List<Question> questions) {
+	protected Question getRandomQuestionFromQuestionList(
+			List<Question> questions) {
 		Collections.shuffle(questions);
 		if (questions.size() > 0) {
 			Question question = questions.get(0);
@@ -84,12 +85,12 @@ public class Game {
 	public boolean checkAnswer(Question question, Answer answer) {
 
 		boolean correct = question.getCorrectAnswers().contains(answer);
-		
+
 		if (!answeredQuestions.contains(question)) {
 			answeredQuestions.add(question);
 		}
 		this.session.setTotalAttempts(this.session.getTotalAttempts() + 1);
-		
+
 		if (correct) {
 			this.session
 					.setCorrectAttempts(this.session.getCorrectAttempts() + 1);
@@ -97,9 +98,7 @@ public class Game {
 					.getConsecutiveAttempts() + 1);
 		} else {
 			this.session.setConsecutiveAttempts(0);
-			if (!recentlyWronglyAnsweredQuestions.contains(question)) {
-				recentlyWronglyAnsweredQuestions.add(question);
-			}
+
 		}
 		return correct;
 	}
@@ -107,7 +106,7 @@ public class Game {
 	public boolean checkAnswers(Question question, List<Answer> answers) {
 
 		boolean correct = question.getCorrectAnswers().containsAll(answers);
-		
+
 		if (!answeredQuestions.contains(question)) {
 			answeredQuestions.add(question);
 		}
@@ -120,9 +119,7 @@ public class Game {
 					.getConsecutiveAttempts() + 1);
 		} else {
 			this.session.setConsecutiveAttempts(0);
-			if (!recentlyWronglyAnsweredQuestions.contains(question)) {
-				recentlyWronglyAnsweredQuestions.add(question);
-			}
+
 		}
 		return correct;
 	}

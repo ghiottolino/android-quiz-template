@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
-public class EduQuizActivity extends Activity {
+public class EduQuizActivity extends QuizActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
