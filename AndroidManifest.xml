@@ -50,6 +50,14 @@ limitations under the License.
             android:name="com.nicolatesser.androidquiztemplate.activity.QuizActivity"
             android:label="@string/title_activity_one_player_quiz" >
         </activity>
+        <activity
+            android:name="com.nicolatesser.androidquiztemplate.activity.ResetActivity"
+            android:label="@string/title_activity_one_player_quiz" >
+        </activity>
+        <activity
+            android:name="com.nicolatesser.androidquiztemplate.activity.EndOfGameActivity"
+            android:label="@string/title_activity_end_of_game" >
+        </activity>
     </application>
 
 </manifest>

@@ -17,6 +17,8 @@ import com.nicolatesser.androidquiztemplate.quiz.Session;
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,6 +30,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class QuizActivity extends Activity {
+
+	public static final String RECORD_PREF_KEY = "RECORD";
 
 	public static final String SESSION_PREF_KEY = "SESSION";
 
@@ -41,10 +45,32 @@ public class QuizActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.quiz);
+		
 		initViews();
 	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		loadSession();
+		loadRecord();
+		if (this.question == null) {
+			displayNextQuestion();
+		}
+
+	}
+
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		Session session = Game.getInstance().getSession();
+		saveStringFieldInPreferences(SESSION_PREF_KEY, session.toString());
+		int record = Game.getInstance().getRecord();
+		saveIntFieldInPreferences(SESSION_PREF_KEY, record);
+	}
 	
-	
+
 	public void initViews() {
 		questionTextView = (TextView) findViewById(R.id.question);
 		feedbacktTextView = (TextView) findViewById(R.id.feedback);
@@ -54,8 +80,26 @@ public class QuizActivity extends Activity {
 
 	public void displayNextQuestion() {
 		this.question = Game.getInstance().getQuestion();
-		displayQuestion(question);
-		showFeedback(Game.getInstance().getSession());
+
+		if (this.question == null) {
+			endQuiz();
+		} else {
+
+			Handler handler = new Handler();
+			handler.postDelayed(new Runnable() {
+				public void run() {
+					displayQuestion(question);
+					showFeedback(Game.getInstance().getSession());
+				}
+			}, 500);
+
+		}
+
+	}
+
+	public void endQuiz() {
+		Intent statIntent = new Intent(this, EndOfGameActivity.class);
+		startActivity(statIntent);
 	}
 
 	public void displayQuestion(final Question question) {
@@ -76,16 +120,17 @@ public class QuizActivity extends Activity {
 					boolean checkAnswer = checkAnswers(Arrays.asList(answer));
 					if (!checkAnswer) {
 						button.setEnabled(false);
-						button.setTextColor(getResources().getColor(R.color.red));
+						button.setTextColor(getResources()
+								.getColor(R.color.red));
 						Handler handler = new Handler();
 						handler.postDelayed(new Runnable() {
 							public void run() {
 								button.setSelected(true);
 							}
 						}, 1000);
-					}
-					else {
-						button.setTextColor(getResources().getColor(R.color.green));
+					} else {
+						button.setTextColor(getResources().getColor(
+								R.color.green));
 					}
 				}
 
@@ -120,8 +165,9 @@ public class QuizActivity extends Activity {
 							for (final Button answerButton : answersButtons) {
 								answerButton.setEnabled(false);
 								answerButton.setSelected(false);
-								answerButton.setTextColor(getResources().getColor(R.color.red));
-								
+								answerButton.setTextColor(getResources()
+										.getColor(R.color.red));
+
 								Handler handler = new Handler();
 								handler.postDelayed(new Runnable() {
 									public void run() {
@@ -129,10 +175,10 @@ public class QuizActivity extends Activity {
 									}
 								}, 1000);
 							}
-						}
-						else {
+						} else {
 							for (final Button answerButton : answersButtons) {
-								answerButton.setTextColor(getResources().getColor(R.color.green));
+								answerButton.setTextColor(getResources()
+										.getColor(R.color.green));
 							}
 						}
 					}
@@ -151,29 +197,81 @@ public class QuizActivity extends Activity {
 		boolean checkAnswer = Game.getInstance()
 				.checkAnswers(question, answers);
 		if (checkAnswer) {
-			showFeedback(checkAnswer,"Correct");
+			showFeedback(checkAnswer, "Correct");
 			displayNextQuestion();
 		} else {
-			showFeedback(checkAnswer,"Wrong");
-			displayNextQuestion();		}
+			showFeedback(checkAnswer, "Wrong");
+			displayNextQuestion();
+		}
 		return checkAnswer;
 	}
 
 	public void showFeedback(boolean b, String string) {
 		if (b) {
-			feedbacktTextView.setText("Correct");		
-			feedbacktTextView.setTextColor(getResources().getColor(R.color.green));
+			feedbacktTextView.setText("Correct");
+			feedbacktTextView.setTextColor(getResources().getColor(
+					R.color.green));
 		}
-		
-		else {
-			feedbacktTextView.setText("Wrong");	
-			feedbacktTextView.setTextColor(getResources().getColor(R.color.red));
 
-		}	
+		else {
+			feedbacktTextView.setText("Wrong");
+			feedbacktTextView
+					.setTextColor(getResources().getColor(R.color.red));
+
+		}
 	}
 
 	public void showFeedback(Session session) {
 
+	}
+
+	
+	protected void loadRecord()
+	{
+		int record = getIntFieldInPreferences(RECORD_PREF_KEY);
+		Game.getInstance().setRecord(record);
+	}
+	
+	protected void loadSession()
+	{
+		String serializedSession = getStringFieldInPreferences(SESSION_PREF_KEY);
+		Game.getInstance().setSession(new Session(serializedSession));
+	}
+	
+	protected Integer getIntFieldInPreferences(String fieldName) {
+		String settingPrefixName = getApplicationContext().getPackageName();
+		SharedPreferences settings = getSharedPreferences(settingPrefixName, 0);
+		int field = settings.getInt(fieldName, 0);
+		return field;
+	}
+
+	protected String getStringFieldInPreferences(String fieldName) {
+		String settingPrefixName = getApplicationContext().getPackageName();
+		SharedPreferences settings = getSharedPreferences(settingPrefixName, 0);
+		String field = settings.getString(fieldName, "");
+		return field;
+	}
+
+	protected void saveIntFieldInPreferences(String fieldName, Integer n) {
+
+		String settingPrefixName = getApplicationContext().getPackageName();
+		SharedPreferences settings = getSharedPreferences(settingPrefixName, 0);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putInt(fieldName, n);
+
+		// Commit the edits!
+		boolean commit = editor.commit();
+	}
+
+	protected void saveStringFieldInPreferences(String fieldName, String value) {
+
+		String settingPrefixName = getApplicationContext().getPackageName();
+		SharedPreferences settings = getSharedPreferences(settingPrefixName, 0);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putString(fieldName, value);
+
+		// Commit the edits!
+		boolean commit = editor.commit();
 	}
 
 	@Override

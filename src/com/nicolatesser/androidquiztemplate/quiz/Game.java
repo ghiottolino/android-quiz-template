@@ -14,6 +14,8 @@ import java.util.Vector;
 public class Game {
 
 	private Session session = new Session();
+	
+	private int record = 0;
 
 	private QuestionDatabase questionDatabase;
 
@@ -43,6 +45,7 @@ public class Game {
 	
 	public void reset() {
 		session = new Session();
+		this.answeredQuestions = new ArrayList<Question>();
 	}
 
 	public Session getSession() {
@@ -52,6 +55,7 @@ public class Game {
 	public void setSession(Session session) {
 		this.session = session;
 	}
+
 
 	public Question getQuestion() {
 
@@ -126,6 +130,25 @@ public class Game {
 
 		}
 		return correct;
+	}
+	
+	
+
+	public boolean isNewRecord() {
+		if (session.getConsecutiveAttempts() > this.record) {
+			this.record = session.getConsecutiveAttempts();
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public int getRecord() {
+		return this.record;
+	}
+
+	public void setRecord(int record) {
+		this.record = record;
 	}
 
 }
