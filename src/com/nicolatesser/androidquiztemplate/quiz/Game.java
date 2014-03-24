@@ -40,6 +40,10 @@ public class Game {
 		this.questions = questionDatabase.getQuestions();
 		this.answeredQuestions = new ArrayList<Question>();
 	}
+	
+	public void reset() {
+		session = new Session();
+	}
 
 	public Session getSession() {
 		return session;
@@ -53,7 +57,7 @@ public class Game {
 
 		List<Question> interserction = new ArrayList<Question>();
 		interserction.addAll(questions);
-		interserction.retainAll(answeredQuestions);
+		interserction.removeAll(answeredQuestions);
 		Question question = getRandomQuestionFromQuestionList(interserction);
 		this.currentQuestion = question;
 		return question;

@@ -15,6 +15,6 @@
   -->
 
 <resources>
-    <color name="green">#224894</color>
-    <color name="red">#E62525</color>
+    <color name="green">#ff1fb60d</color>
+    <color name="red">#ffb60d0d</color>
 </resources>

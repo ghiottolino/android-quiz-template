@@ -76,12 +76,16 @@ public class QuizActivity extends Activity {
 					boolean checkAnswer = checkAnswers(Arrays.asList(answer));
 					if (!checkAnswer) {
 						button.setEnabled(false);
+						button.setTextColor(getResources().getColor(R.color.red));
 						Handler handler = new Handler();
 						handler.postDelayed(new Runnable() {
 							public void run() {
 								button.setSelected(true);
 							}
 						}, 1000);
+					}
+					else {
+						button.setTextColor(getResources().getColor(R.color.green));
 					}
 				}
 
@@ -116,13 +120,19 @@ public class QuizActivity extends Activity {
 							for (final Button answerButton : answersButtons) {
 								answerButton.setEnabled(false);
 								answerButton.setSelected(false);
-
+								answerButton.setTextColor(getResources().getColor(R.color.red));
+								
 								Handler handler = new Handler();
 								handler.postDelayed(new Runnable() {
 									public void run() {
 										answerButton.setEnabled(true);
 									}
 								}, 1000);
+							}
+						}
+						else {
+							for (final Button answerButton : answersButtons) {
+								answerButton.setTextColor(getResources().getColor(R.color.green));
 							}
 						}
 					}
@@ -152,10 +162,14 @@ public class QuizActivity extends Activity {
 	public void showFeedback(boolean b, String string) {
 		if (b) {
 			feedbacktTextView.setText("Correct");		
+			feedbacktTextView.setTextColor(getResources().getColor(R.color.green));
 		}
+		
 		else {
 			feedbacktTextView.setText("Wrong");	
-		}		
+			feedbacktTextView.setTextColor(getResources().getColor(R.color.red));
+
+		}	
 	}
 
 	public void showFeedback(Session session) {
