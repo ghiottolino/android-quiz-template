@@ -125,6 +125,7 @@ public class Game {
 					.setCorrectAttempts(this.session.getCorrectAttempts() + 1);
 			this.session.setConsecutiveAttempts(this.session
 					.getConsecutiveAttempts() + 1);
+			updateRecord();
 		} else {
 			this.session.setConsecutiveAttempts(0);
 
@@ -132,7 +133,11 @@ public class Game {
 		return correct;
 	}
 	
-	
+	public void updateRecord() {
+		if (session.getConsecutiveAttempts() > this.record) {
+			this.record = session.getConsecutiveAttempts();
+		} 
+	}
 
 	public boolean isNewRecord() {
 		if (session.getConsecutiveAttempts() > this.record) {

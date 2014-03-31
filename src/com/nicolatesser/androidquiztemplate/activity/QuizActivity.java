@@ -31,6 +31,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class QuizActivity extends Activity {
 
@@ -44,8 +45,7 @@ public class QuizActivity extends Activity {
 	protected RelativeLayout lastQuestionWrongView;
 	protected TextView consecutiveTextView;
 	protected TextView recordTextView;
-	
-	
+
 	protected ListView mListView;
 	protected ListAdapter adapter;
 	protected Question question;
@@ -54,7 +54,7 @@ public class QuizActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.quiz);
-		
+
 		initViews();
 	}
 
@@ -69,7 +69,6 @@ public class QuizActivity extends Activity {
 
 	}
 
-
 	@Override
 	public void onPause() {
 		super.onPause();
@@ -78,7 +77,6 @@ public class QuizActivity extends Activity {
 		int record = Game.getInstance().getRecord();
 		saveIntFieldInPreferences(RECORD_PREF_KEY, record);
 	}
-	
 
 	public void initViews() {
 		questionTextView = (TextView) findViewById(R.id.question);
@@ -88,12 +86,34 @@ public class QuizActivity extends Activity {
 		lastQuestionNeutralView.setVisibility(View.VISIBLE);
 		lastQuestionOkView.setVisibility(View.GONE);
 		lastQuestionWrongView.setVisibility(View.GONE);
-		
-		consecutiveTextView= (TextView) findViewById(R.id.consecutiveQuestionsText);
-		recordTextView= (TextView) findViewById(R.id.recordText);
-		
+
+		consecutiveTextView = (TextView) findViewById(R.id.consecutiveQuestionsText);
+		recordTextView = (TextView) findViewById(R.id.recordText);
+
 		mListView = (ListView) findViewById(R.id.list);
 
+		initFeedbackToastMessages();
+	}
+
+	public void initFeedbackToastMessages() {
+		setOnClickToast(lastQuestionNeutralView,"This bubble shows whether you answered the last question correctly or wrongly. If the bubble is grey it means that you did not answer any question yet.");
+		setOnClickToast(lastQuestionOkView,"The green bubble shows that your last answer was CORRECT. Great.");
+		setOnClickToast(lastQuestionWrongView,"The red bubble shows that your last answer was WRONG. Pity.");
+		setOnClickToast(consecutiveTextView,"The yellow bubble shows how many CONSECUTIVE correct answers you just gave.Go Go Go.");
+		setOnClickToast(recordTextView,"The blue bubble shows the RECORD of consecutive correct answers. Beat it!");
+		 
+	
+	}
+
+	public void setOnClickToast(View view, final String message) {
+		view.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				Toast.makeText(getApplicationContext(), message,
+						Toast.LENGTH_LONG).show();
+			}
+		});
 	}
 
 	public void displayNextQuestion() {
@@ -107,7 +127,8 @@ public class QuizActivity extends Activity {
 			handler.postDelayed(new Runnable() {
 				public void run() {
 					displayQuestion(question);
-					showFeedback(Game.getInstance().getSession(), Game.getInstance().getRecord());
+					showFeedback(Game.getInstance().getSession(), Game
+							.getInstance().getRecord());
 				}
 			}, 500);
 
@@ -225,69 +246,66 @@ public class QuizActivity extends Activity {
 	}
 
 	public void showFeedback(boolean b, String string) {
-		if (b) {
-			
-			lastQuestionNeutralView.setVisibility(View.GONE);
-			lastQuestionOkView.setVisibility(View.VISIBLE);
-			lastQuestionWrongView.setVisibility(View.GONE);
-			
-			
-		}
 
-		else {
-			
-			lastQuestionNeutralView.setVisibility(View.GONE);
-			lastQuestionOkView.setVisibility(View.GONE);
-			lastQuestionWrongView.setVisibility(View.VISIBLE);
-
-
-		}
 	}
 
 	public void showFeedback(Session session, int record) {
-		consecutiveTextView.setText(Integer.toString(session.getConsecutiveAttempts()));
-		consecutiveTextView.setText(Integer.toString(record));
-		
+
+		Integer totalAttempts = session.getTotalAttempts();
+		Integer consecutiveAttempts = session.getConsecutiveAttempts();
+		if (totalAttempts == 0) {
+			lastQuestionNeutralView.setVisibility(View.VISIBLE);
+			lastQuestionOkView.setVisibility(View.GONE);
+			lastQuestionWrongView.setVisibility(View.GONE);
+		} else {
+			if (consecutiveAttempts > 0) {
+				lastQuestionNeutralView.setVisibility(View.GONE);
+				lastQuestionOkView.setVisibility(View.VISIBLE);
+				lastQuestionWrongView.setVisibility(View.GONE);
+			} else {
+				lastQuestionNeutralView.setVisibility(View.GONE);
+				lastQuestionOkView.setVisibility(View.GONE);
+				lastQuestionWrongView.setVisibility(View.VISIBLE);
+			}
+
+		}
+
+		consecutiveTextView.setText(Integer.toString(consecutiveAttempts));
+		recordTextView.setText(Integer.toString(record));
+
 	}
 
-	
-	protected void loadRecord()
-	{
+	protected void loadRecord() {
 		int record = getIntFieldInPreferences(RECORD_PREF_KEY);
 		Game.getInstance().setRecord(record);
 	}
-	
-	protected void loadSession()
-	{
+
+	protected void loadSession() {
 		String serializedSession = getStringFieldInPreferences(SESSION_PREF_KEY);
 		Game.getInstance().setSession(new Session(serializedSession));
 	}
-	
+
 	protected Integer getIntFieldInPreferences(String fieldName) {
 		String settingPrefixName = getApplicationContext().getPackageName();
 		SharedPreferences settings = getSharedPreferences(settingPrefixName, 0);
 		int field = 0;
-		try{
+		try {
 			field = settings.getInt(fieldName, 0);
+		} catch (ClassCastException e) {
+			// do nothing
 		}
-		catch(ClassCastException e) {
-			//do nothing
-		}
-		
-		
+
 		return field;
 	}
-	
 
 	protected String getStringFieldInPreferences(String fieldName) {
 		String settingPrefixName = getApplicationContext().getPackageName();
 		SharedPreferences settings = getSharedPreferences(settingPrefixName, 0);
 		String field = "";
-		try{
+		try {
 			field = settings.getString(fieldName, "");
-		}
-		catch(ClassCastException e) {
-			//do nothing
+		} catch (ClassCastException e) {
+			// do nothing
 		}
 		return field;
 	}
