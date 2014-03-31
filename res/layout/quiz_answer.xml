@@ -10,6 +10,7 @@
         android:layout_height="0dip"
         android:layout_weight="1"
         android:text="@string/hello"
+         style="?android:attr/buttonBarButtonStyle"
         android:textAppearance="@android:style/TextAppearance.Small"
         android:layout_margin="3dp">
     </Button>

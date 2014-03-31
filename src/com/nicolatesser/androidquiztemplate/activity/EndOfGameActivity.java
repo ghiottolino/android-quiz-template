@@ -40,14 +40,13 @@ public class EndOfGameActivity extends Activity {
 			((TextView)findViewById(R.id.correctAnswers)).setText("Correct Answers: "+session.getCorrectAttempts());
 			((TextView)findViewById(R.id.correctAnswersRate)).setText("Correctness Rate: "+session.getCorrectnessRate());
 			((TextView)findViewById(R.id.bestSequence)).setText("Best correct Sequence: "+session.getBestConsecutiveAttempts());
-			((TextView)findViewById(R.id.overallRecord)).setText("Record: "+"0");	
+			((TextView)findViewById(R.id.overallRecord)).setText("Record: "+game.getRecord());	
 		}
 	}
 	
 	public void restart() {
 		Game.getInstance().reset();
-		Session session = Game.getInstance().getSession();
-		//serialize session
+		SessionUtils.setSession(this, new Session());		
 		finish();
 	}
 

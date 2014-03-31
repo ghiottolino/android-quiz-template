@@ -73,9 +73,9 @@ public class QuizActivity extends Activity {
 	public void onPause() {
 		super.onPause();
 		Session session = Game.getInstance().getSession();
-		saveStringFieldInPreferences(SESSION_PREF_KEY, session.toString());
+		SessionUtils.setSession(this, session);		
 		int record = Game.getInstance().getRecord();
-		saveIntFieldInPreferences(RECORD_PREF_KEY, record);
+		SessionUtils.setRecord(this, record);
 	}
 
 	public void initViews() {
@@ -276,61 +276,16 @@ public class QuizActivity extends Activity {
 	}
 
 	protected void loadRecord() {
-		int record = getIntFieldInPreferences(RECORD_PREF_KEY);
+		int record = SessionUtils.getIntFieldInPreferences(this, RECORD_PREF_KEY);
 		Game.getInstance().setRecord(record);
 	}
 
 	protected void loadSession() {
-		String serializedSession = getStringFieldInPreferences(SESSION_PREF_KEY);
+		String serializedSession = SessionUtils.getStringFieldInPreferences(this,SESSION_PREF_KEY);
 		Game.getInstance().setSession(new Session(serializedSession));
 	}
 
-	protected Integer getIntFieldInPreferences(String fieldName) {
-		String settingPrefixName = getApplicationContext().getPackageName();
-		SharedPreferences settings = getSharedPreferences(settingPrefixName, 0);
-		int field = 0;
-		try {
-			field = settings.getInt(fieldName, 0);
-		} catch (ClassCastException e) {
-			// do nothing
-		}
 
-		return field;
-	}
-
-	protected String getStringFieldInPreferences(String fieldName) {
-		String settingPrefixName = getApplicationContext().getPackageName();
-		SharedPreferences settings = getSharedPreferences(settingPrefixName, 0);
-		String field = "";
-		try {
-			field = settings.getString(fieldName, "");
-		} catch (ClassCastException e) {
-			// do nothing
-		}
-		return field;
-	}
-
-	protected void saveIntFieldInPreferences(String fieldName, Integer n) {
-
-		String settingPrefixName = getApplicationContext().getPackageName();
-		SharedPreferences settings = getSharedPreferences(settingPrefixName, 0);
-		SharedPreferences.Editor editor = settings.edit();
-		editor.putInt(fieldName, n);
-
-		// Commit the edits!
-		boolean commit = editor.commit();
-	}
-
-	protected void saveStringFieldInPreferences(String fieldName, String value) {
-
-		String settingPrefixName = getApplicationContext().getPackageName();
-		SharedPreferences settings = getSharedPreferences(settingPrefixName, 0);
-		SharedPreferences.Editor editor = settings.edit();
-		editor.putString(fieldName, value);
-
-		// Commit the edits!
-		boolean commit = editor.commit();
-	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

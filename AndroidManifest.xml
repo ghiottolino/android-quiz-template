@@ -22,7 +22,7 @@ limitations under the License.
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="5"
+        android:minSdkVersion="11"
         android:targetSdkVersion="15" />
 
     <application
@@ -48,6 +48,7 @@ limitations under the License.
         </activity>
         <activity
             android:name="com.nicolatesser.androidquiztemplate.activity.QuizActivity"
+            android:screenOrientation="sensorPortrait" 
             android:label="@string/title_activity_one_player_quiz" >
         </activity>
         <activity
