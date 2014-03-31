@@ -1,0 +1,83 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".EndOfGameActivity" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/end_of_game"
+        android:textAppearance="@android:style/TextAppearance.Medium" />
+
+    <TextView
+        android:id="@+id/totalAnswers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal|bottom"
+        android:text="@string/hello_world"
+        android:textAppearance="@android:style/TextAppearance.Medium"
+        android:textStyle="bold" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/correctAnswers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal|bottom"
+        android:text="@string/hello_world"
+        android:textAppearance="@android:style/TextAppearance.Medium"
+        android:textStyle="bold" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/correctAnswersRate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal|bottom"
+        android:text="@string/hello_world"
+        android:textAppearance="@android:style/TextAppearance.Medium"
+        android:textStyle="bold" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/bestSequence"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal|bottom"
+        android:text="@string/hello_world"
+        android:textAppearance="@android:style/TextAppearance.Medium"
+        android:textStyle="bold" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/overallRecord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal|bottom"
+        android:text="@string/hello_world"
+        android:textAppearance="@android:style/TextAppearance.Medium"
+        android:textStyle="bold" >
+    </TextView>
+    
+    
+    <Button
+        android:id="@+id/restart"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/restart"
+        android:textAppearance="@android:style/TextAppearance.Medium"
+        android:layout_margin="3dp">
+    </Button>
+
+</LinearLayout>

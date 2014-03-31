@@ -14,8 +14,10 @@ import com.nicolatesser.androidquiztemplate.quiz.Question;
 import com.nicolatesser.androidquiztemplate.quiz.QuestionDatabase;
 import com.nicolatesser.androidquiztemplate.quiz.Session;
 
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.os.Handler;
+import android.R.integer;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,6 +29,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class QuizActivity extends Activity {
@@ -36,7 +39,13 @@ public class QuizActivity extends Activity {
 	public static final String SESSION_PREF_KEY = "SESSION";
 
 	protected TextView questionTextView;
-	protected TextView feedbacktTextView;
+	protected RelativeLayout lastQuestionNeutralView;
+	protected RelativeLayout lastQuestionOkView;
+	protected RelativeLayout lastQuestionWrongView;
+	protected TextView consecutiveTextView;
+	protected TextView recordTextView;
+	
+	
 	protected ListView mListView;
 	protected ListAdapter adapter;
 	protected Question question;
@@ -67,13 +76,22 @@ public class QuizActivity extends Activity {
 		Session session = Game.getInstance().getSession();
 		saveStringFieldInPreferences(SESSION_PREF_KEY, session.toString());
 		int record = Game.getInstance().getRecord();
-		saveIntFieldInPreferences(SESSION_PREF_KEY, record);
+		saveIntFieldInPreferences(RECORD_PREF_KEY, record);
 	}
 	
 
 	public void initViews() {
 		questionTextView = (TextView) findViewById(R.id.question);
-		feedbacktTextView = (TextView) findViewById(R.id.feedback);
+		lastQuestionNeutralView = (RelativeLayout) findViewById(R.id.lastQuestionNeutral);
+		lastQuestionOkView = (RelativeLayout) findViewById(R.id.lastQuestionOk);
+		lastQuestionWrongView = (RelativeLayout) findViewById(R.id.lastQuestionWrong);
+		lastQuestionNeutralView.setVisibility(View.VISIBLE);
+		lastQuestionOkView.setVisibility(View.GONE);
+		lastQuestionWrongView.setVisibility(View.GONE);
+		
+		consecutiveTextView= (TextView) findViewById(R.id.consecutiveQuestionsText);
+		recordTextView= (TextView) findViewById(R.id.recordText);
+		
 		mListView = (ListView) findViewById(R.id.list);
 
 	}
@@ -89,7 +107,7 @@ public class QuizActivity extends Activity {
 			handler.postDelayed(new Runnable() {
 				public void run() {
 					displayQuestion(question);
-					showFeedback(Game.getInstance().getSession());
+					showFeedback(Game.getInstance().getSession(), Game.getInstance().getRecord());
 				}
 			}, 500);
 
@@ -208,21 +226,28 @@ public class QuizActivity extends Activity {
 
 	public void showFeedback(boolean b, String string) {
 		if (b) {
-			feedbacktTextView.setText("Correct");
-			feedbacktTextView.setTextColor(getResources().getColor(
-					R.color.green));
+			
+			lastQuestionNeutralView.setVisibility(View.GONE);
+			lastQuestionOkView.setVisibility(View.VISIBLE);
+			lastQuestionWrongView.setVisibility(View.GONE);
+			
+			
 		}
 
 		else {
-			feedbacktTextView.setText("Wrong");
-			feedbacktTextView
-					.setTextColor(getResources().getColor(R.color.red));
+			
+			lastQuestionNeutralView.setVisibility(View.GONE);
+			lastQuestionOkView.setVisibility(View.GONE);
+			lastQuestionWrongView.setVisibility(View.VISIBLE);
+
 
 		}
 	}
 
-	public void showFeedback(Session session) {
-
+	public void showFeedback(Session session, int record) {
+		consecutiveTextView.setText(Integer.toString(session.getConsecutiveAttempts()));
+		consecutiveTextView.setText(Integer.toString(record));
+		
 	}
 
 	
@@ -241,14 +266,29 @@ public class QuizActivity extends Activity {
 	protected Integer getIntFieldInPreferences(String fieldName) {
 		String settingPrefixName = getApplicationContext().getPackageName();
 		SharedPreferences settings = getSharedPreferences(settingPrefixName, 0);
-		int field = settings.getInt(fieldName, 0);
+		int field = 0;
+		try{
+			field = settings.getInt(fieldName, 0);
+		}
+		catch(ClassCastException e) {
+			//do nothing
+		}
+		
+		
 		return field;
 	}
+	
 
 	protected String getStringFieldInPreferences(String fieldName) {
 		String settingPrefixName = getApplicationContext().getPackageName();
 		SharedPreferences settings = getSharedPreferences(settingPrefixName, 0);
-		String field = settings.getString(fieldName, "");
+		String field = "";
+		try{
+			field = settings.getString(fieldName, "");
+		}
+		catch(ClassCastException e) {
+			//do nothing
+		}
 		return field;
 	}
 

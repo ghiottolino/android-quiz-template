@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/question_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent"
+    android:layout_weight="3"
+    android:gravity="center|center_horizontal"
+    android:orientation="horizontal" >
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/question"
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/hello"
+        android:textAppearance="@android:style/TextAppearance.Large" >
+    </TextView>
+
+</LinearLayout>
