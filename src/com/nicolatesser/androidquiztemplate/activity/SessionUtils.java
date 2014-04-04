@@ -1,15 +1,24 @@
 package com.nicolatesser.androidquiztemplate.activity;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import com.nicolatesser.androidquiztemplate.quiz.Session;
 
 import android.R.integer;
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 public class SessionUtils {
 	public static final String RECORD_PREF_KEY = "RECORD";
 
 	public static final String SESSION_PREF_KEY = "SESSION";
+	
+	public static final String SELECTED_CATEGORIES_PREF_KEY = "CATEGORIES";
+
 	
 	
 	public static void setRecord(Activity activity, int record) {
@@ -29,6 +38,22 @@ public class SessionUtils {
 		String serializedSession = getStringFieldInPreferences(activity,SESSION_PREF_KEY);
 		return serializedSession;
 	}
+	
+	public static List<String> getSelectedCategories(Activity activity){
+		
+		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity.getBaseContext());
+	    Set<String> selections = preferences.getStringSet(SELECTED_CATEGORIES_PREF_KEY, new HashSet<String>());
+
+	    List<String> selectedCategories = new ArrayList<String>();
+	    selectedCategories.addAll(selections);
+	    
+	    return selectedCategories;
+	}
+
+	
+	
+	
+	
 
 
 	protected static Integer getIntFieldInPreferences(Activity activity,

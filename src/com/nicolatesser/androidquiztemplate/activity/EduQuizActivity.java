@@ -19,6 +19,8 @@ public class EduQuizActivity extends QuizActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.quiz);
+		ActionBarHelper.setUpActionBar(this);
+
 	}
 	
 	@Override
@@ -43,11 +45,11 @@ public class EduQuizActivity extends QuizActivity {
 		return checkAnswer;
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.one_player_quiz, menu);
-		return true;
-	}
+//	@Override
+//	public boolean onCreateOptionsMenu(Menu menu) {
+//		// Inflate the menu; this adds items to the action bar if it is present.
+//		getMenuInflater().inflate(R.menu.main, menu);
+//		return true;
+//	}
 
 }

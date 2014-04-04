@@ -10,5 +10,6 @@
     <string name="title_activity_end_of_game">End</string>
     <string name="end_of_game">Congratulations, you answered to all the questions.\n\n Here are some statistics:</string>
     <string name="restart">Restart</string>
-    
+      <string name="pref_header_general">General</string>
+   
 </resources>

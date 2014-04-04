@@ -23,6 +23,8 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		ActionBarHelper.setUpActionBar(this);
+
 		//prepare questions database
 		QuestionDatabase qd = QuestionDatabase.getInstance();
 		List<Question> questions = new LinkedList<Question>();

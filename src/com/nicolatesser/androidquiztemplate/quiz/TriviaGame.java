@@ -14,7 +14,7 @@ import java.util.Vector;
 public class TriviaGame implements Game {
 
 	protected Session session = new Session();
-	
+
 	protected int record = 0;
 
 	protected QuestionDatabase questionDatabase;
@@ -25,12 +25,22 @@ public class TriviaGame implements Game {
 
 	protected Question currentQuestion;
 
-	public TriviaGame(QuestionDatabase questionDatabase) {
-		this.questions = questionDatabase.getQuestions();
+	public TriviaGame(QuestionDatabase questionDatabase,
+			List<String> selectedCategories) {
+
+		if ((selectedCategories != null) && (selectedCategories.size() > 0)) {
+			this.questions = questionDatabase
+					.getFilteredQuestions(selectedCategories);
+		} else {
+			this.questions = questionDatabase.getQuestions();
+		}
+
 		this.answeredQuestions = new ArrayList<Question>();
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.nicolatesser.androidquiztemplate.quiz.Game#reset()
 	 */
 	@Override
@@ -39,7 +49,9 @@ public class TriviaGame implements Game {
 		this.answeredQuestions = new ArrayList<Question>();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.nicolatesser.androidquiztemplate.quiz.Game#getSession()
 	 */
 	@Override
@@ -47,16 +59,21 @@ public class TriviaGame implements Game {
 		return session;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.nicolatesser.androidquiztemplate.quiz.Game#setSession(com.nicolatesser.androidquiztemplate.quiz.Session)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.nicolatesser.androidquiztemplate.quiz.Game#setSession(com.nicolatesser
+	 * .androidquiztemplate.quiz.Session)
 	 */
 	@Override
 	public void setSession(Session session) {
 		this.session = session;
 	}
 
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.nicolatesser.androidquiztemplate.quiz.Game#getQuestion()
 	 */
 	@Override
@@ -86,11 +103,17 @@ public class TriviaGame implements Game {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see com.nicolatesser.androidquiztemplate.quiz.Game#checkAnswer(com.nicolatesser.androidquiztemplate.quiz.Question, com.nicolatesser.androidquiztemplate.quiz.Answer)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.nicolatesser.androidquiztemplate.quiz.Game#checkAnswer(com.nicolatesser
+	 * .androidquiztemplate.quiz.Question,
+	 * com.nicolatesser.androidquiztemplate.quiz.Answer)
 	 */
 	@Override
-	public boolean checkAnswer(Question question, Answer answer, boolean firstAttempt) {
+	public boolean checkAnswer(Question question, Answer answer,
+			boolean firstAttempt) {
 
 		boolean correct = question.getCorrectAnswers().contains(answer);
 
@@ -112,11 +135,16 @@ public class TriviaGame implements Game {
 		return correct;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.nicolatesser.androidquiztemplate.quiz.Game#checkAnswers(com.nicolatesser.androidquiztemplate.quiz.Question, java.util.List)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.nicolatesser.androidquiztemplate.quiz.Game#checkAnswers(com.nicolatesser
+	 * .androidquiztemplate.quiz.Question, java.util.List)
 	 */
 	@Override
-	public boolean checkAnswers(Question question, List<Answer> answers, boolean firstAttempt) {
+	public boolean checkAnswers(Question question, List<Answer> answers,
+			boolean firstAttempt) {
 
 		boolean correct = question.getCorrectAnswers().containsAll(answers);
 
@@ -137,14 +165,16 @@ public class TriviaGame implements Game {
 		}
 		return correct;
 	}
-	
+
 	public void updateRecord() {
 		if (session.getConsecutiveAttempts() > this.record) {
 			this.record = session.getConsecutiveAttempts();
-		} 
+		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.nicolatesser.androidquiztemplate.quiz.Game#isNewRecord()
 	 */
 	@Override
@@ -157,7 +187,9 @@ public class TriviaGame implements Game {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.nicolatesser.androidquiztemplate.quiz.Game#getRecord()
 	 */
 	@Override
@@ -165,7 +197,9 @@ public class TriviaGame implements Game {
 		return this.record;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.nicolatesser.androidquiztemplate.quiz.Game#setRecord(int)
 	 */
 	@Override

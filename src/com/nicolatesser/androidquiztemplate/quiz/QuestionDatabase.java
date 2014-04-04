@@ -1,5 +1,7 @@
 package com.nicolatesser.androidquiztemplate.quiz;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -69,10 +71,38 @@ public class QuestionDatabase {
 	public List<Question> getQuestions() {
 		return questions;
 	}
+	
+	
+	
+	public List<Question> getFilteredQuestions(List<String> categories) {
+		
+		List<Question> filteredQuestions = new LinkedList<Question>();
+		for (Question question:this.questions) {
+			boolean match=false;
+			for (String category : question.getCategories()) {
+				if (categories.contains(category)) {
+					match=true;
+				}
+			}
+			if (match) {
+				filteredQuestions.add(question);
+			}
+		}
+		
+		return filteredQuestions;
+	}
+	
+	
+	
+	
+	
+	
+	
 
 	public List<String> getCategories(){
 		 List<String> categories =  new LinkedList<String>();
 		 categories.addAll(questionsByCategory.keySet());
+		 Collections.sort(categories);
 		 return categories;
 	}
 	

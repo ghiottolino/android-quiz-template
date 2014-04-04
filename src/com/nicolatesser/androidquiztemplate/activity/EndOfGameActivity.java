@@ -20,7 +20,8 @@ public class EndOfGameActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_end_of_game);
-		
+		ActionBarHelper.setUpActionBar(this);
+
 		showStats();
 		
 		((Button)findViewById(R.id.restart)).setOnClickListener(new OnClickListener() {
@@ -54,7 +55,7 @@ public class EndOfGameActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.end_of_game, menu);
+		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 

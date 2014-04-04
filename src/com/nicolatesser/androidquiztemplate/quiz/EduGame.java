@@ -19,8 +19,8 @@ public class EduGame extends TriviaGame implements Game {
 
 	private Random rg = new Random();
 
-	public EduGame(QuestionDatabase questionDatabase) {
-		super(questionDatabase);
+	public EduGame(QuestionDatabase questionDatabase, List<String> selectedCategories) {
+		super(questionDatabase,selectedCategories);
 		this.recentlyWronglyAnsweredQuestions = new LinkedList<Question>();
 
 	}

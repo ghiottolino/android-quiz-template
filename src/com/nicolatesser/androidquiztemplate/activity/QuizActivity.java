@@ -58,6 +58,7 @@ public class QuizActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.quiz);
+		ActionBarHelper.setUpActionBar(this);
 
 		initViews();
 	}
@@ -303,15 +304,6 @@ public class QuizActivity extends Activity {
 	protected void loadSession() {
 		String serializedSession = SessionUtils.getStringFieldInPreferences(this,SESSION_PREF_KEY);
 		GameHolder.getInstance().setSession(new Session(serializedSession));
-	}
-
-
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.one_player_quiz, menu);
-		return true;
 	}
 
 }
