@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.nicolatesser.androidquiztemplate.R;
 import com.nicolatesser.androidquiztemplate.quiz.Game;
+import com.nicolatesser.androidquiztemplate.quiz.GameHolder;
 import com.nicolatesser.androidquiztemplate.quiz.Session;
 
 public class EndOfGameActivity extends Activity {
@@ -33,7 +34,7 @@ public class EndOfGameActivity extends Activity {
 	}
 	
 	public void showStats() {
-		Game game = Game.getInstance();
+		Game game = GameHolder.getInstance();
 		if (game!=null) {
 			Session session = game.getSession();
 			((TextView)findViewById(R.id.totalAnswers)).setText("Total Answers: "+session.getTotalAttempts());
@@ -45,7 +46,7 @@ public class EndOfGameActivity extends Activity {
 	}
 	
 	public void restart() {
-		Game.getInstance().reset();
+		GameHolder.getInstance().reset();
 		SessionUtils.setSession(this, new Session());		
 		finish();
 	}

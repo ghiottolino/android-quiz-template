@@ -9,7 +9,7 @@ import com.nicolatesser.androidquiztemplate.R;
 import com.nicolatesser.androidquiztemplate.R.layout;
 import com.nicolatesser.androidquiztemplate.R.menu;
 import com.nicolatesser.androidquiztemplate.quiz.Answer;
-import com.nicolatesser.androidquiztemplate.quiz.Game;
+import com.nicolatesser.androidquiztemplate.quiz.GameHolder;
 import com.nicolatesser.androidquiztemplate.quiz.Question;
 import com.nicolatesser.androidquiztemplate.quiz.QuestionDatabase;
 import com.nicolatesser.androidquiztemplate.quiz.Session;
@@ -76,9 +76,9 @@ public class QuizActivity extends Activity {
 	@Override
 	public void onPause() {
 		super.onPause();
-		Session session = Game.getInstance().getSession();
+		Session session = GameHolder.getInstance().getSession();
 		SessionUtils.setSession(this, session);		
-		int record = Game.getInstance().getRecord();
+		int record = GameHolder.getInstance().getRecord();
 		SessionUtils.setRecord(this, record);
 	}
 
@@ -124,7 +124,7 @@ public class QuizActivity extends Activity {
 	}
 
 	public void displayNextQuestion() {
-		this.question = Game.getInstance().getQuestion();
+		this.question = GameHolder.getInstance().getQuestion();
 
 		if (this.question == null) {
 			endQuiz();
@@ -134,7 +134,7 @@ public class QuizActivity extends Activity {
 			handler.postDelayed(new Runnable() {
 				public void run() {
 					displayQuestion(question);
-					showFeedback(Game.getInstance().getSession(), Game
+					showFeedback(GameHolder.getInstance().getSession(), GameHolder
 							.getInstance().getRecord());
 				}
 			}, 500);
@@ -253,8 +253,8 @@ public class QuizActivity extends Activity {
 	}
 
 	public boolean checkAnswers(List<Answer> answers) {
-		boolean checkAnswer = Game.getInstance()
-				.checkAnswers(question, answers);
+		boolean checkAnswer = GameHolder.getInstance()
+				.checkAnswers(question, answers,true);
 		if (checkAnswer) {
 			showFeedback(checkAnswer, "Correct");
 			displayNextQuestion();
@@ -297,12 +297,12 @@ public class QuizActivity extends Activity {
 
 	protected void loadRecord() {
 		int record = SessionUtils.getIntFieldInPreferences(this, RECORD_PREF_KEY);
-		Game.getInstance().setRecord(record);
+		GameHolder.getInstance().setRecord(record);
 	}
 
 	protected void loadSession() {
 		String serializedSession = SessionUtils.getStringFieldInPreferences(this,SESSION_PREF_KEY);
-		Game.getInstance().setSession(new Session(serializedSession));
+		GameHolder.getInstance().setSession(new Session(serializedSession));
 	}
 
 

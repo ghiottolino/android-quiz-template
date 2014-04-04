@@ -2,17 +2,18 @@ package com.nicolatesser.androidquiztemplate.activity;
 
 import java.util.List;
 
-import com.nicolatesser.androidquiztemplate.R;
-import com.nicolatesser.androidquiztemplate.R.layout;
-import com.nicolatesser.androidquiztemplate.R.menu;
-import com.nicolatesser.androidquiztemplate.quiz.Answer;
-import com.nicolatesser.androidquiztemplate.quiz.Game;
-
 import android.os.Bundle;
-import android.app.Activity;
 import android.view.Menu;
 
+import com.nicolatesser.androidquiztemplate.R;
+import com.nicolatesser.androidquiztemplate.quiz.Answer;
+import com.nicolatesser.androidquiztemplate.quiz.Game;
+import com.nicolatesser.androidquiztemplate.quiz.GameHolder;
+
 public class EduQuizActivity extends QuizActivity {
+
+	
+	boolean firstAttempt = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -20,10 +21,19 @@ public class EduQuizActivity extends QuizActivity {
 		setContentView(R.layout.quiz);
 	}
 	
-
+	@Override
+	public void displayNextQuestion() {
+		super.displayNextQuestion();
+		firstAttempt=true;
+	}
+	
+	@Override
 	public boolean checkAnswers(List<Answer> answers) {
-		boolean checkAnswer = Game.getInstance()
-				.checkAnswers(question, answers);
+		Game game = GameHolder.getInstance();
+		boolean checkAnswer = game
+				.checkAnswers(question, answers, firstAttempt);
+		firstAttempt=false;
+		
 		if (checkAnswer) {
 			showFeedback(checkAnswer, "Correct");
 			displayNextQuestion();

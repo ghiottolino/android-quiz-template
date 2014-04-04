@@ -11,7 +11,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.Vector;
 
-public class EduGame extends Game {
+public class EduGame extends TriviaGame implements Game {
 
 	private List<Question> recentlyWronglyAnsweredQuestions;
 
@@ -19,25 +19,13 @@ public class EduGame extends Game {
 
 	private Random rg = new Random();
 
-	public static EduGame instance = null;
-
-	public static EduGame getInstance() {
-		if (instance == null) {
-			throw new IllegalAccessError();
-		}
-		return instance;
-	}
-
-	public static void setInstance(EduGame game) {
-		instance = game;
-	}
-
 	public EduGame(QuestionDatabase questionDatabase) {
 		super(questionDatabase);
 		this.recentlyWronglyAnsweredQuestions = new LinkedList<Question>();
 
 	}
 
+	@Override
 	public Question getQuestion() {
 		Question question = null;
 
@@ -90,6 +78,7 @@ public class EduGame extends Game {
 	 * @param answer
 	 * @return
 	 */
+	@Override
 	public boolean checkAnswer(Question question, Answer answer, boolean firstAttempt) {
 
 		boolean correct = question.getCorrectAnswers().contains(answer);
@@ -113,6 +102,7 @@ public class EduGame extends Game {
 		return correct;
 	}
 
+	@Override
 	public boolean checkAnswers(Question question, List<Answer> answers, boolean firstAttempt) {
 
 		boolean correct = question.getCorrectAnswers().containsAll(answers);

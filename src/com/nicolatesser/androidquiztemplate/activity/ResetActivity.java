@@ -1,11 +1,10 @@
 package com.nicolatesser.androidquiztemplate.activity;
 
-import com.nicolatesser.androidquiztemplate.quiz.Game;
-import com.nicolatesser.androidquiztemplate.quiz.Session;
-
 import android.app.Activity;
-import android.content.SharedPreferences;
 import android.os.Bundle;
+
+import com.nicolatesser.androidquiztemplate.quiz.GameHolder;
+import com.nicolatesser.androidquiztemplate.quiz.Session;
 
 public class ResetActivity extends Activity {
 
@@ -13,7 +12,7 @@ public class ResetActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		//serialize session
-		Game.getInstance().reset();
+		GameHolder.getInstance().reset();
 		SessionUtils.setSession(this, new Session());	
 		finish();
 	}

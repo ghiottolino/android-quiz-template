@@ -1,6 +1,5 @@
 package com.nicolatesser.androidquiztemplate.activity;
 
-import com.nicolatesser.androidquiztemplate.quiz.Game;
 import com.nicolatesser.androidquiztemplate.quiz.Session;
 
 import android.R.integer;
