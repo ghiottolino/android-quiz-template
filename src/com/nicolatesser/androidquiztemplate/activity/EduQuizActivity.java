@@ -13,7 +13,7 @@ import com.nicolatesser.androidquiztemplate.quiz.GameHolder;
 public class EduQuizActivity extends QuizActivity {
 
 	
-	boolean firstAttempt = true;
+	private boolean firstAttempt = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class EduQuizActivity extends QuizActivity {
 	@Override
 	public void displayNextQuestion() {
 		super.displayNextQuestion();
-		firstAttempt=true;
+		
 	}
 	
 	@Override
@@ -34,14 +34,19 @@ public class EduQuizActivity extends QuizActivity {
 		Game game = GameHolder.getInstance();
 		boolean checkAnswer = game
 				.checkAnswers(question, answers, firstAttempt);
-		firstAttempt=false;
 		
 		if (checkAnswer) {
-			showFeedback(checkAnswer, "Correct");
-			displayNextQuestion();
+			if (firstAttempt) {
+				showFeedback(checkAnswer, "Correct");
+			}
+			this.displayNextQuestion();
+			this.firstAttempt=true;
 		} else {
 			showFeedback(checkAnswer, "Wrong");
+			firstAttempt=false;
 		}
+		
+
 		return checkAnswer;
 	}
 

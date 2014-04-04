@@ -21,6 +21,7 @@ import android.R.integer;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -157,7 +158,6 @@ public class QuizActivity extends Activity {
 		}
 		styleQuestionText(questionTextView,questionText);
 
-		questionTextView.setText(questionText);
 
 		
 		OnClickListener listener = new OnClickListener() {
@@ -245,12 +245,58 @@ public class QuizActivity extends Activity {
 
 	private void styleQuestionText(TextView textView,
 			String questionText) {
+		
+		
+		int screenSize = getResources().getConfiguration().screenLayout &
+		        Configuration.SCREENLAYOUT_SIZE_MASK;
+
+		int maxCharsForLine;
+		switch(screenSize) {
+		    case Configuration.SCREENLAYOUT_SIZE_LARGE:
+		    	maxCharsForLine = 35;
+		        break;
+		    case Configuration.SCREENLAYOUT_SIZE_NORMAL:
+		    	maxCharsForLine = 25;
+		        break;
+		    case Configuration.SCREENLAYOUT_SIZE_SMALL:
+		    	maxCharsForLine = 20;
+		        break;
+		    default:
+		    	maxCharsForLine = 25;
+		}
+		
+		
+		String formattedText = TextUtils.formatText(questionText, maxCharsForLine);
+		questionTextView.setText(formattedText);
+
+		
+		
+		int numberOfLines = TextUtils.numberOfLines(formattedText);
 		int length = questionText.length();
-		// TODO : refactory
-		if (length<13) textView.setTextSize(getResources().getDimension(R.dimen.question_big_size));
-		else if (length<22) textView.setTextSize(getResources().getDimension(R.dimen.question_medium_size));
-		else if (length<40) textView.setTextSize(getResources().getDimension(R.dimen.question_small_size));
-		else textView.setTextSize(getResources().getDimension(R.dimen.question_very_small_size));	
+		
+		if (length<=maxCharsForLine) {
+			if (length<=20) {
+				questionTextView.setTextSize(getResources().getDimension(R.dimen.question_big_size));
+			}
+			else {
+				questionTextView.setTextSize(getResources().getDimension(R.dimen.question_medium_size));
+
+			}
+		}
+		else {
+			if (numberOfLines==1) {
+				questionTextView.setTextSize(getResources().getDimension(R.dimen.question_medium_size));
+			}
+			else {
+				if (numberOfLines==2) {
+					questionTextView.setTextSize(getResources().getDimension(R.dimen.question_small_size));
+				}
+				else {
+					questionTextView.setTextSize(getResources().getDimension(R.dimen.question_very_small_size));
+				}
+			}
+		}
+		
 	}
 
 	public boolean checkAnswers(List<Answer> answers) {
@@ -267,7 +313,15 @@ public class QuizActivity extends Activity {
 	}
 
 	public void showFeedback(boolean b, String string) {
-
+		if (b) {
+			lastQuestionNeutralView.setVisibility(View.GONE);
+			lastQuestionOkView.setVisibility(View.VISIBLE);
+			lastQuestionWrongView.setVisibility(View.GONE);
+		} else {
+			lastQuestionNeutralView.setVisibility(View.GONE);
+			lastQuestionOkView.setVisibility(View.GONE);
+			lastQuestionWrongView.setVisibility(View.VISIBLE);
+		}
 	}
 
 	public void showFeedback(Session session, int record) {

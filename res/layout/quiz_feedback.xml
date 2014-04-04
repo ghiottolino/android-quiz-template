@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text=""
-                android:textAppearance="@android:style/TextAppearance.Medium"
+                android:textSize="@dimen/bubble_text_size"
                 android:textColor="@android:color/white" />
         </RelativeLayout>
     </RelativeLayout>
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="Ok"
-                android:textAppearance="@android:style/TextAppearance.Medium"
+                android:textSize="@dimen/bubble_text_size"
                 android:textColor="@android:color/white" />
         </RelativeLayout>
     </RelativeLayout>
@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="No"
-                android:textAppearance="@android:style/TextAppearance.Medium"
+                android:textSize="@dimen/bubble_text_size"
                 android:textColor="@android:color/white" />
         </RelativeLayout>
     </RelativeLayout>
@@ -106,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="0"
-                android:textAppearance="@android:style/TextAppearance.Medium"
+                android:textSize="@dimen/bubble_text_size"
                 android:textColor="@android:color/white" />
         </RelativeLayout>
     </RelativeLayout>
@@ -131,7 +131,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="0"
-                android:textAppearance="@android:style/TextAppearance.Medium"
+                android:textSize="@dimen/bubble_text_size"
                 android:textColor="@android:color/white" />
         </RelativeLayout>
     </RelativeLayout>

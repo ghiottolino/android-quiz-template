@@ -5,4 +5,19 @@
          screen margins) for sw600dp devices (e.g. 7" tablets) here.
     -->
 
+
+    <dimen name="button_size">40dp</dimen>
+    <dimen name="question_big_size">60dp</dimen>
+    <dimen name="question_medium_size">40dp</dimen>
+    <dimen name="question_small_size">30</dimen>
+    <dimen name="question_very_small_size">20dp</dimen>
+    
+    <dimen name="answer_big_size">40dp</dimen>
+    <dimen name="answer_small_size">20dp</dimen>
+    
+    
+    <dimen name="bubble_size">100dp</dimen>
+    <dimen name="bubble_text_size">40dp</dimen>
+    
+
 </resources>
