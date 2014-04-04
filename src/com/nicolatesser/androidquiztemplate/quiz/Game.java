@@ -13,17 +13,17 @@ import java.util.Vector;
 
 public class Game {
 
-	private Session session = new Session();
+	protected Session session = new Session();
 	
-	private int record = 0;
+	protected int record = 0;
 
-	private QuestionDatabase questionDatabase;
+	protected QuestionDatabase questionDatabase;
 
 	protected List<Question> questions;
 
 	protected List<Question> answeredQuestions;
 
-	private Question currentQuestion;
+	protected Question currentQuestion;
 
 	public static Game instance = null;
 
@@ -104,6 +104,7 @@ public class Game {
 					.setCorrectAttempts(this.session.getCorrectAttempts() + 1);
 			this.session.setConsecutiveAttempts(this.session
 					.getConsecutiveAttempts() + 1);
+			updateRecord();
 		} else {
 			this.session.setConsecutiveAttempts(0);
 

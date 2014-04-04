@@ -43,6 +43,10 @@ public class QuizActivity extends Activity {
 	protected RelativeLayout lastQuestionNeutralView;
 	protected RelativeLayout lastQuestionOkView;
 	protected RelativeLayout lastQuestionWrongView;
+	protected RelativeLayout consecutiveView;
+	protected RelativeLayout recordView;
+	
+	
 	protected TextView consecutiveTextView;
 	protected TextView recordTextView;
 
@@ -83,9 +87,12 @@ public class QuizActivity extends Activity {
 		lastQuestionNeutralView = (RelativeLayout) findViewById(R.id.lastQuestionNeutral);
 		lastQuestionOkView = (RelativeLayout) findViewById(R.id.lastQuestionOk);
 		lastQuestionWrongView = (RelativeLayout) findViewById(R.id.lastQuestionWrong);
+		consecutiveView = (RelativeLayout) findViewById(R.id.consecutiveQuestions);
+		recordView = (RelativeLayout) findViewById(R.id.record);
 		lastQuestionNeutralView.setVisibility(View.VISIBLE);
 		lastQuestionOkView.setVisibility(View.GONE);
 		lastQuestionWrongView.setVisibility(View.GONE);
+
 
 		consecutiveTextView = (TextView) findViewById(R.id.consecutiveQuestionsText);
 		recordTextView = (TextView) findViewById(R.id.recordText);
@@ -99,8 +106,8 @@ public class QuizActivity extends Activity {
 		setOnClickToast(lastQuestionNeutralView,"This bubble shows whether you answered the last question correctly or wrongly. If the bubble is grey it means that you did not answer any question yet.");
 		setOnClickToast(lastQuestionOkView,"The green bubble shows that your last answer was CORRECT. Great.");
 		setOnClickToast(lastQuestionWrongView,"The red bubble shows that your last answer was WRONG. Pity.");
-		setOnClickToast(consecutiveTextView,"The yellow bubble shows how many CONSECUTIVE correct answers you just gave.Go Go Go.");
-		setOnClickToast(recordTextView,"The blue bubble shows the RECORD of consecutive correct answers. Beat it!");
+		setOnClickToast(consecutiveView,"The yellow bubble shows how many CONSECUTIVE correct answers you just gave.Go Go Go.");
+		setOnClickToast(recordView,"The blue bubble shows the RECORD of consecutive correct answers. Beat it!");
 		 
 	
 	}
@@ -147,8 +154,11 @@ public class QuizActivity extends Activity {
 		if (question.hasMultipleCorrectAnswers()) {
 			questionText += "(" + question.getNumberOfCorrectAnswers() + ")";
 		}
+		styleQuestionText(questionTextView,questionText);
 
 		questionTextView.setText(questionText);
+
+		
 		OnClickListener listener = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -230,6 +240,16 @@ public class QuizActivity extends Activity {
 		Collections.shuffle(answers);
 		adapter = new AnswerAdapter(this, R.id.answer, answers, listener);
 		mListView.setAdapter(adapter);
+	}
+
+	private void styleQuestionText(TextView textView,
+			String questionText) {
+		int length = questionText.length();
+		// TODO : refactory
+		if (length<13) textView.setTextSize(getResources().getDimension(R.dimen.question_big_size));
+		else if (length<22) textView.setTextSize(getResources().getDimension(R.dimen.question_medium_size));
+		else if (length<40) textView.setTextSize(getResources().getDimension(R.dimen.question_small_size));
+		else textView.setTextSize(getResources().getDimension(R.dimen.question_very_small_size));	
 	}
 
 	public boolean checkAnswers(List<Answer> answers) {

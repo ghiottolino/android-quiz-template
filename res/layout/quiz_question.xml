@@ -20,6 +20,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:text="@string/hello"
+        android:textSize="@dimen/question_medium_size"
         android:textAppearance="@android:style/TextAppearance.Large" >
     </TextView>
 

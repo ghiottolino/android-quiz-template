@@ -1,8 +1,12 @@
 package com.nicolatesser.androidquiztemplate.activity;
 
+import java.util.List;
+
 import com.nicolatesser.androidquiztemplate.R;
 import com.nicolatesser.androidquiztemplate.R.layout;
 import com.nicolatesser.androidquiztemplate.R.menu;
+import com.nicolatesser.androidquiztemplate.quiz.Answer;
+import com.nicolatesser.androidquiztemplate.quiz.Game;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -14,6 +18,19 @@ public class EduQuizActivity extends QuizActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.quiz);
+	}
+	
+
+	public boolean checkAnswers(List<Answer> answers) {
+		boolean checkAnswer = Game.getInstance()
+				.checkAnswers(question, answers);
+		if (checkAnswer) {
+			showFeedback(checkAnswer, "Correct");
+			displayNextQuestion();
+		} else {
+			showFeedback(checkAnswer, "Wrong");
+		}
+		return checkAnswer;
 	}
 
 	@Override

@@ -34,11 +34,11 @@
     </LinearLayout>
     -->
 
-    <include layout="@layout/quiz_feedback" />
+    <include layout="@layout/quiz_feedback"  android:layout_weight="3" />
 
     <!-- question -->
 
-    <include layout="@layout/quiz_question" />
+    <include layout="@layout/quiz_question"  android:layout_weight="3" />
 
     <ListView
         android:id="@+id/list"
