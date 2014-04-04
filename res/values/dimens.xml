@@ -8,7 +8,7 @@
     
     <dimen name="question_big_size">25dp</dimen>
     <dimen name="question_medium_size">18dp</dimen>
-    <dimen name="question_small_size">11dp</dimen>
+    <dimen name="question_small_size">10dp</dimen>
     <dimen name="question_very_small_size">8dp</dimen>
     
            
