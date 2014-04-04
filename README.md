@@ -40,7 +40,7 @@ The most important element in a quiz is a question, which is made of a question 
 You should learn how to create a question, here is an example:
 
 ```java	
-String questionText = "Which team won the "+placement+" place at the "+year+" World Cup in "+host.trim()+"?";
+String questionText = "Question Text?";
 List<Answer> answers = new LinkedList<Answer>();
 answers.add(new Answer("Correct Answer", true));
 answers.add(new Answer("Wrong Answer", false));
@@ -118,4 +118,31 @@ public class MyQuizActivity extends QuizActivity {
 
 
 
-## Games implemented using this framework
+## Applications implemented using this framework
+
+### German Gender Quiz
+https://play.google.com/store/apps/details?id=com.nicolatesser.germangenderquiz
+
+### What's Playing
+
+### German Verb Prepositions Quiz
+https://play.google.com/store/apps/details?id=com.nicolatesser.germanverbpreposition
+
+### German Adjective Declension
+https://play.google.com/store/apps/details?id=com.nicolatesser.germanadjectivedeclension
+
+### Algebra Quiz
+https://play.google.com/store/apps/details?id=com.nicolatesser.algebraquiz
+
+### English irregular verbs quiz
+https://play.google.com/store/apps/details?id=com.nicolatesser.englishirregularverb
+
+### Spanish Verb Prepositions Quiz
+https://play.google.com/store/apps/details?id=com.nicolatesser.spanishverbpreposition
+
+### Italian articles quiz (free)
+https://play.google.com/store/apps/details?id=com.nicolatesser.italiangenderquiz
+
+### Italian articles quiz (paid)
+https://play.google.com/store/apps/details?id=com.nicolatesser.italiangenderquiz.full
+
