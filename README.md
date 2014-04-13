@@ -123,28 +123,59 @@ public class MyQuizActivity extends QuizActivity {
 ## Applications implemented using this framework
 
 ### German Gender Quiz
-https://play.google.com/store/apps/details?id=com.nicolatesser.germangenderquiz
+
+For testing your knowledge of german words gender.
+This game consists of guessing the gender of a German word. At every stage you will see a random German noun, and you can guess its gender by clicking on the 3 buttons ('der' for masculine, 'die' for feminine and 'das' for neutral words).
+
+[Play Store] (https://play.google.com/store/apps/details?id=com.nicolatesser.germangenderquiz)
+
+![alt tag](https://db.tt/qGAYoOcf)
+
 
 ### What's Playing
 
+What's playing? allows you to test your musical culture by listening and guessing tracks' titles, artists' names and release year of popular songs!
+
+Soon in the play store!
+
+![alt tag](https://db.tt/mR96q0wP)
+
+![alt tag](https://db.tt/b9Ioy5bD)
+
+
 ### German Verb Prepositions Quiz
-https://play.google.com/store/apps/details?id=com.nicolatesser.germanverbpreposition
+
+The quiz consists of guessing the prepositions (and the case) fitting to a German verb. At every stage you will see a random German verb, and you can guess the prepositions (1 ore more possible correct answers are possible) by clicking on the correct button. If the verb could be combined with more than one preposition the number of correct answers is shown in brackets at the end of the question. 
+
+[Play Store] (https://play.google.com/store/apps/details?id=com.nicolatesser.germanverbpreposition)
+
+![alt tag](https://lh4.ggpht.com/-Two9KJBSmx5IpwebIwH2rXN_mGKbrNLCtsbix7clm5L7pPCS6A0ohCU_DlRqE18sQ=h310-rw)
 
 ### German Adjective Declension
-https://play.google.com/store/apps/details?id=com.nicolatesser.germanadjectivedeclension
+
+The purpose of the game is to decline the adjective of the given german sentences, according to gender, number and case of the noun and the type of declination (definite articles, undefinite articles, null articles). It also provides an handy cheatsheet for learning more about adjective declension.
+
+[Play Store] (https://play.google.com/store/apps/details?id=com.nicolatesser.germanadjectivedeclension)
+
+![alt tag](https://lh3.ggpht.com/nuBu7dt4NIPQcE-qXmjq2i5RMGKi-zV0x6zlXdMzxlZPVfeNx2v908hnL_LnJyklBw=h310-rw)
 
 ### Algebra Quiz
-https://play.google.com/store/apps/details?id=com.nicolatesser.algebraquiz
+
+For testing your algebra skills, and train the four basic mathematical operations.
+You can also choose if you want to separately train the addition, the division, the multiplication or the division.
+This app is useful for both kids learning the basic operations and adults willing to do some mental gymnastics.
+
+[Play Store] (https://play.google.com/store/apps/details?id=com.nicolatesser.algebraquiz)
+
+![alt tag](https://lh3.ggpht.com/XGh17dSUPD91-cHYKVQf06OTOnPsdwu5G1EnvF1TgnNTce0hQxeNCMyi0K4PbSngGg=h310-rw)
 
 ### English irregular verbs quiz
-https://play.google.com/store/apps/details?id=com.nicolatesser.englishirregularverb
+[Play Store]  (https://play.google.com/store/apps/details?id=com.nicolatesser.englishirregularverb)
 
 ### Spanish Verb Prepositions Quiz
-https://play.google.com/store/apps/details?id=com.nicolatesser.spanishverbpreposition
+[Play Store]  (https://play.google.com/store/apps/details?id=com.nicolatesser.spanishverbpreposition)
 
 ### Italian articles quiz (free)
-https://play.google.com/store/apps/details?id=com.nicolatesser.italiangenderquiz
+[Play Store]  (https://play.google.com/store/apps/details?id=com.nicolatesser.italiangenderquiz)
 
-### Italian articles quiz (paid)
-https://play.google.com/store/apps/details?id=com.nicolatesser.italiangenderquiz.full
 
