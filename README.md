@@ -149,15 +149,11 @@ The quiz consists of guessing the prepositions (and the case) fitting to a Germa
 
 [Play Store] (https://play.google.com/store/apps/details?id=com.nicolatesser.germanverbpreposition)
 
-![alt tag](https://lh4.ggpht.com/-Two9KJBSmx5IpwebIwH2rXN_mGKbrNLCtsbix7clm5L7pPCS6A0ohCU_DlRqE18sQ=h310-rw)
-
 ### German Adjective Declension
 
 The purpose of the game is to decline the adjective of the given german sentences, according to gender, number and case of the noun and the type of declination (definite articles, undefinite articles, null articles). It also provides an handy cheatsheet for learning more about adjective declension.
 
 [Play Store] (https://play.google.com/store/apps/details?id=com.nicolatesser.germanadjectivedeclension)
-
-![alt tag](https://lh3.ggpht.com/nuBu7dt4NIPQcE-qXmjq2i5RMGKi-zV0x6zlXdMzxlZPVfeNx2v908hnL_LnJyklBw=h310-rw)
 
 ### Algebra Quiz
 
@@ -167,15 +163,22 @@ This app is useful for both kids learning the basic operations and adults willin
 
 [Play Store] (https://play.google.com/store/apps/details?id=com.nicolatesser.algebraquiz)
 
-![alt tag](https://lh3.ggpht.com/XGh17dSUPD91-cHYKVQf06OTOnPsdwu5G1EnvF1TgnNTce0hQxeNCMyi0K4PbSngGg=h310-rw)
-
 ### English irregular verbs quiz
+
+The quiz consists of guessing the simple past and the past participle of an English irregular verb shown in simple present. At every stage you will see a random English verb, and you can guess the related simple past and past participle by clicking on the correct answer
+
 [Play Store]  (https://play.google.com/store/apps/details?id=com.nicolatesser.englishirregularverb)
 
 ### Spanish Verb Prepositions Quiz
+
+The quiz consists of guessing the correct prepositions for a Spanish verb. At every stage you will see a random Spanish verb, and you can guess the correct preposition (or select "no preposition" if the verb does not want a preposition) by clicking on the correct button. If the verb could be combined with more than one preposition the number of correct answers is shown in brackets at the end of the question
+
 [Play Store]  (https://play.google.com/store/apps/details?id=com.nicolatesser.spanishverbpreposition)
 
 ### Italian articles quiz (free)
+
+The quiz consists of guessing the article of an Italian word. At every stage you will see a random Italian noun, and you can guess its article by clicking on the 4 buttons corresponding to the 4 singular determinative articles (il,lo,la,l').
+
 [Play Store]  (https://play.google.com/store/apps/details?id=com.nicolatesser.italiangenderquiz)
 
 
