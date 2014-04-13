@@ -24,7 +24,8 @@ Moreover the library provides a quiz domain model and logic and a lot of extensi
 
 ##Educational Game
 
-TODO : image
+![alt tag](docs/images/edu.png)
+
 * Educational Game: In an educational game the user really has to focus and try to memorize the correct answers. A simple but clever algorithm will make the user learn from her mistakes: if a wrong answer is selected, the wrongly answered question will be asked again soon, so the user have the possibility to answer correctly the next time (and learn!).
 
 ##Trivia Game
