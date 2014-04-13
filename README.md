@@ -5,24 +5,22 @@ android-quiz-template
 
 An android library project to use for different types of multiple-answer quiz applications. 
 In particular the templates offers 2 kind of quizes, or game modes:
-* Educational Game: In an educational game the user really has to focus and try to memorize the correct answers. A simple but clever algorithm will make the user learn from her mistakes: if a wrong answer is selected, the wrongly answered question will be asked again soon, so the user have the possibility to answer correctly the next time (and learn!).
-* Trivia Game: This is a more classic and fast kind of game: the user get a question and a bunch of answers, and try to guess the correct one. Both if the answer is correct or not the next question will be shown and the answered question will not be asked again in the game session.
+* Educational Game: for learning while playing through a clever repetition system of questions which has been answered wrongly.
+* Trivia Game: for a more classic and fast hit or miss kind of game.
 
-Moreover the library provides a quiz domain model and a lot of extensible UI elements.
-See the featues:
+Moreover the library provides a quiz domain model and logic and a lot of extensible UI elements.
 
 ##Features
 * Educational Game Template
 * Trivia Game Template
 * Multiple correct answer mode
 * Pretty and Extensible UI
-* Answers always shown in a random position
-* Pretty Feedback and record managent 
+* Random order answers (the answers are always shown in a random position)
+* Pretty user feedback and record managent 
 * Question categorization
-* Settings Activity where to select which categories should be active at the moment
+* Settings Activity for selecting which categories should be active for the current quiz
 * Compatibility with AndroidAnnotations (http://androidannotations.org/)
-* DefaultUncaughtExceptionHandler
-
+* DefaultUncaughtExceptionHandler with bug report functionality
 
 ##Educational Game
 
