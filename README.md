@@ -24,13 +24,16 @@ Moreover the library provides a quiz domain model and logic and a lot of extensi
 
 ##Educational Game
 
-![alt tag](docs/images/edu.png)
+![alt tag](https://db.tt/qGAYoOcf)
 
-* Educational Game: In an educational game the user really has to focus and try to memorize the correct answers. A simple but clever algorithm will make the user learn from her mistakes: if a wrong answer is selected, the wrongly answered question will be asked again soon, so the user have the possibility to answer correctly the next time (and learn!).
+In an educational game the user really has to focus when giving an answer and try to memorize the correct answers. If the wrong answer is given, the user should try answering again until she founds the correct answer. 
+A simple but clever repetition algorithm will make the user learn from her mistakes: the wrongly answered question will be asked again soon, so the user have the possibility to answer correctly the next time (and learn!).
 
 ##Trivia Game
-TODO: image
-* Trivia Game: This is a more classic and fast kind of game: the user get a question and a bunch of answers, and try to guess the correct one. Both if the answer is correct or not the next question will be shown and the answered question will not be asked again in the game session.
+
+![alt tag](https://db.tt/Q23omwUI)
+
+The Trivia game is the more classic and fast kind of game: the user sees a question and a bunch of answers, and try to guess the correct one. Both if the answer is correct or not the next question will be shown and the answered question will not be asked again in the game session.
 
 ### How to create a Quiz in 4 easy steps
 
@@ -90,7 +93,7 @@ protected void onCreate(Bundle savedInstanceState) {
 		
 ### How to create a Quiz application using Android Annotations
 
-The android-quiz-template library does not depend from AndroidAnnotations, but as I am big fan of it, I wanted to build my applications using it. So I had to tweek a bit the library code in order to make it more easily accessible also from classes annotated with @EActivity.
+The android-quiz-template library does not depend from [AndroidAnnotations](androidannotations.org), but as I am big fan of it, I wanted to build my applications using it. So I had to tweek a bit the library code in order to make it more easily accessible also from classes annotated with @EActivity.
 
 In order to use the annotations for creating a quiz, you can still follow the points 1 to 3 changing you code in a more android annotations fashion, but I reccomend you to pay attention to step 4, and using this snippet as referiment:
 
