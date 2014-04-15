@@ -22,6 +22,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -69,6 +70,14 @@ public class QuizActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		
+		if (GameHolder.isInit()) {
+			if (GameHolder.getInstance().isExited()) {
+				finish();
+				return;
+			}
+		}
+		
 		loadSession();
 		loadRecord();
 		if (this.question == null) {
@@ -277,7 +286,7 @@ public class QuizActivity extends Activity {
 		int length = questionText.length();
 		
 		if (length<=maxCharsForLine) {
-			if (length<=20) {
+			if (length<=17) {
 				questionTextView.setTextSize(getResources().getDimension(R.dimen.question_big_size));
 			}
 			else {
@@ -367,8 +376,8 @@ public class QuizActivity extends Activity {
 	public void onBackPressed() {
 	    if (doubleBackToExitPressedOnce) {
 	    	GameHolder.getInstance().setExited(true);
-	        super.onBackPressed();
-	        return;
+			finish();
+			return;
 	    }
 
 	    this.doubleBackToExitPressedOnce = true;
