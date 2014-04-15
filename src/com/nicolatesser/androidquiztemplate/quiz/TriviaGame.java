@@ -25,6 +25,8 @@ public class TriviaGame implements Game {
 
 	protected Question currentQuestion;
 
+	protected boolean exited = false;
+	
 	public TriviaGame(QuestionDatabase questionDatabase,
 			List<String> selectedCategories) {
 
@@ -205,6 +207,16 @@ public class TriviaGame implements Game {
 	@Override
 	public void setRecord(int record) {
 		this.record = record;
+	}
+
+	@Override
+	public boolean isExited() {
+		return exited;
+	}
+
+	@Override
+	public void setExited(boolean exited) {
+		this.exited=exited;
 	}
 
 }

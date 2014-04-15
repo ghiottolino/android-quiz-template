@@ -30,5 +30,10 @@ public interface Game {
 	public abstract int getRecord();
 
 	public abstract void setRecord(int record);
+	
+	public abstract boolean isExited();
+	
+	public abstract void setExited(boolean exited);
+	
 
 }

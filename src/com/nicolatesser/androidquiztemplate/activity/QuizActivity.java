@@ -54,7 +54,9 @@ public class QuizActivity extends Activity {
 	protected ListView mListView;
 	protected ListAdapter adapter;
 	protected Question question;
+	protected boolean doubleBackToExitPressedOnce;
 
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -359,5 +361,26 @@ public class QuizActivity extends Activity {
 		String serializedSession = SessionUtils.getStringFieldInPreferences(this,SESSION_PREF_KEY);
 		GameHolder.getInstance().setSession(new Session(serializedSession));
 	}
+	
+	
+	@Override
+	public void onBackPressed() {
+	    if (doubleBackToExitPressedOnce) {
+	    	GameHolder.getInstance().setExited(true);
+	        super.onBackPressed();
+	        return;
+	    }
+
+	    this.doubleBackToExitPressedOnce = true;
+	    Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+	    new Handler().postDelayed(new Runnable() {
+
+	        @Override
+	        public void run() {
+	            doubleBackToExitPressedOnce=false;                       
+	        }
+	    }, 3000);
+	} 
 
 }

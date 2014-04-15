@@ -15,4 +15,8 @@ public class GameHolder {
 		instance = game;
 	}
 	
+	public static boolean isInit() {
+		return instance!=null;
+	}
+	
 }
