@@ -37,7 +37,7 @@ The Trivia game is the more classic and fast kind of game: the user sees a quest
 
 ### How to create a Quiz in 4 easy steps
 
-1. Create your own Questions (with a QuestionGenerator)
+1. Create your own Questions (i.e. with you own QuestionGenerator)
 The most important element in a quiz is a question, which is made of a question text, a list of answers (at least one shoul be correct) and a list of categories.
 You should learn how to create a question, here is an example:
 
@@ -52,29 +52,38 @@ List<String> categories = Arrays.asList("category1", "category2");
 Question question = new Question(questionText, answers, categories );
 
 ```
+It's a good practice to create a class (i.e. QuestionGenerator) that "generates" a List of questions (List<Question> questions) in order to decouple the components of the tests.
+The Question generation is in many cases where the android-quiz-templates applications differentiate from each others:
+* some generators could just generate algebra questions using Random numbers  [Algebra Quiz] (https://play.google.com/store/apps/details?id=com.nicolatesser.algebraquiz)
+* some generators could load a database a words with genders from a text file [German Gender Quiz] (https://play.google.com/store/apps/details?id=com.nicolatesser.germanverbpreposition)
+* some generators could load a question catalogue from a Internet resource ...
+* and so on...
 
+2. Load you questions database:
 
-2. Load you questions database just if it's needed:
+Before starting your game, wherever in your application you should initialize the QuestionDatabase. The QuestionDatabase will be initialized just once for each execution of you app, if it already holds some questions, nothing happen.
+For doing so, get an instance of the singleton QuestionDatabase object, and initialized it with a list of questions.
 
 ```java	
 QuestionDatabase qd = QuestionDatabase.getInstance();
 List<Question> questions = new MyQuestionGenerator().getQuestions();	
 qd.prepare(questions);
 ```
-Get an instance of the singleton QuestionDatabase object, and initialized it with a list of questions.
+
+
 
 3. Create you quiz activity:
 
 Create a MyQuizActivity which extends either QuizActivity or EduQuizActivity
 
 ```java	
-public class WorldCup1PActivity extends QuizActivity {
+public class MyQuizActivity extends QuizActivity {
 ...
 }
 
 ```
 
-4. Initialize a game and start playing:
+4. In your Activity (MyQuizActivity) initialize a game and start playing:
 
 
 ```java	
