@@ -183,12 +183,39 @@ public class QuizActivity extends Activity {
 						button.setEnabled(false);
 						button.setTextColor(getResources()
 								.getColor(R.color.red));
+						
+						//color correct button green
+						ListView listView = (ListView) v.getParent().getParent();
+						int childCount = listView.getChildCount();
+						List<Answer> correctAnswers = question.getCorrectAnswers();
+						
+						for (int i = 0; i < childCount; i++) {
+							View linearLayoutView = listView.getChildAt(i);
+							LinearLayout linearLayout = (LinearLayout) linearLayoutView;
+
+							
+							Button otherButton = (Button) linearLayout
+									.getChildAt(0);
+							
+							for (Answer correctAnswer : correctAnswers){
+								if (otherButton.getText().equals(correctAnswer.getText())){
+									otherButton.setTextColor(getResources().getColor(
+											R.color.green));
+								}
+							}
+						
+							
+							
+						}
+
+							
+						
 						Handler handler = new Handler();
 						handler.postDelayed(new Runnable() {
 							public void run() {
 								button.setSelected(true);
 							}
-						}, 1000);
+						}, 1500);
 					} else {
 						button.setTextColor(getResources().getColor(
 								R.color.green));
