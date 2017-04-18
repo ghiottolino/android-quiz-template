@@ -10,7 +10,7 @@ In particular the templates offers 2 kind of quizes, or game modes:
 
 Moreover the library provides a quiz domain model and logic and a lot of extensible UI elements.
 
-##Features
+## Features
 * Educational Game Template
 * Trivia Game Template
 * Multiple correct answer mode
@@ -22,14 +22,14 @@ Moreover the library provides a quiz domain model and logic and a lot of extensi
 * Compatibility with AndroidAnnotations (http://androidannotations.org/)
 * DefaultUncaughtExceptionHandler with bug report functionality
 
-##Educational Game
+## Educational Game
 
 ![alt tag](https://db.tt/qGAYoOcf)
 
 In an educational game the user really has to focus when giving an answer and try to memorize the correct answers. If the wrong answer is given, the user should try answering again until she founds the correct answer. 
 A simple but clever repetition algorithm will make the user learn from her mistakes: the wrongly answered question will be asked again soon, so the user have the possibility to answer correctly the next time (and learn!).
 
-##Trivia Game
+## Trivia Game
 
 ![alt tag](https://db.tt/Q23omwUI)
 
