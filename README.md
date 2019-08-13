@@ -4,7 +4,7 @@ android-quiz-template
 # Introduction
 
 An android library project to use for different types of multiple-answer quiz applications. 
-In particular the templates offers 2 kind of quizes, or game modes:
+In particular the templates offers 2 kind of quizzes, or game modes:
 * Educational Game: for learning while playing through a clever repetition system of questions which has been answered wrongly.
 * Trivia Game: for a more classic and fast hit or miss kind of game.
 
@@ -104,7 +104,7 @@ protected void onCreate(Bundle savedInstanceState) {
 
 The android-quiz-template library does not depend from [AndroidAnnotations](androidannotations.org), but as I am big fan of it, I wanted to build my applications using it. So I had to tweek a bit the library code in order to make it more easily accessible also from classes annotated with @EActivity.
 
-In order to use the annotations for creating a quiz, you can still follow the points 1 to 3 changing you code in a more android annotations fashion, but I reccomend you to pay attention to step 4, and using this snippet as referiment:
+In order to use the annotations for creating a quiz, you can still follow the points 1 to 3 changing you code in a more android annotations fashion, but I recommend you to pay attention to step 4, and using this snippet as referiment:
 
 
 ```java	
